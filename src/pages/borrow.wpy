@@ -1,0 +1,62 @@
+<template>
+  <view class="container">
+    <view wx:if="{{isLogin}}">
+      <view wx:if="{{borrowList.length}}">
+      </view>
+      <view wx:else class="text-center tip-page main-borrow-tip">
+        <block>
+          <icon class="tip-icon" type="cancel" size="70" color="#bbb"></icon>
+          <view class="h4">您的书架为空，快去借阅吧~</view>
+        <button @tap="goBorrow" class="weui-btn mini-btn btn-position" type="primary" size="mini">立即借阅</button>
+      </block>
+      </view>
+    </view>
+    <view wx:else>
+      <noLogin></noLogin>
+    </view>
+  </view>
+
+</template>
+<script>
+  import wepy from 'wepy'
+  import noLogin from '../components/noLogin'
+  export default class borrow extends wepy.page {
+    config = {
+      navigationBarTitleText: '书架'
+    }
+    data = {
+      isLogin: false,
+      borrowList: []
+    }
+    methods = {
+      goBorrow () {
+        console.log('=================')
+        wx.switchTab({
+          url: '/pages/first-page'
+        })
+      }
+    }
+    components = {
+      noLogin
+    }
+    onShow () {
+      console.log(this.$parent.globalData.authorize)
+      console.log('hahah')
+      this.isLogin = this.$parent.globalData.authorize
+    }
+  }
+</script>
+<style lang="less" scoped>
+ .main-borrow-tip{
+    background-color: transparent;
+    text-align:center;
+    .tip-icon{
+      margin-top: 10vh;
+      // margin-left: 50%;
+      // transform: translateX(-50%);
+    }
+    .btn-position{
+      margin-top: 120rpx;
+    }
+ }
+</style>

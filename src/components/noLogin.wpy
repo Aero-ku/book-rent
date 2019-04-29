@@ -1,0 +1,63 @@
+<template>
+  <view class="popup text-center">
+    <icon class="tip-icon" type="cancel" size="70" color="#bbb"></icon>
+    <view class="noLogin">未登录</view>
+    <navigator url="/pages/login/index">
+      <button class="goLogin">登录</button>
+    </navigator>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class noLogin extends wepy.component {
+    props = {
+
+    }
+    data = {
+
+    }
+    events = {
+
+    }
+    methods = {
+
+    }
+  }
+</script>
+<style lang="less">
+.popup{
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  padding-top: 100rpx;
+  background: #fff;
+  box-sizing: border-box;
+  .tip-icon{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    // margin: 0 auto;
+  }
+  .noLogin{
+    margin: 0.8em;
+    color: #666;
+    text-align: center;
+    font-size: 32rpx;
+  }
+  button{
+    position: static;
+    width: 610rpx;
+    height:100rpx;
+    line-height:100rpx;
+    color: #fff;
+    font-size: 36rpx;
+    background-color: #5dbaa7;
+    border-radius: 50rpx;
+    letter-spacing: 5rpx;
+    padding:0;
+    margin: 0 auto;
+  }
+  .goLogin{
+    margin-top: 160rpx;
+  }
+}
+</style>

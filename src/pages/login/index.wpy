@@ -1,0 +1,97 @@
+<template>
+  <view class="popup">
+    <image src="../../images/logo_icon_02.jpg"/>
+    <button class="wx-login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登录</button>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class loginPage extends wepy.page {
+  config = {
+    navigationBarTitleText: '登录'
+  }
+  data = {
+
+  }
+  methods = {
+    bindGetUserInfo (e) {
+      let self = this
+      console.log(e.detail, 'bindGetUserInfo')
+      // wx.getSetting({
+      //   success: function(res) {
+      //     if (res.authSetting['scope.userInfo']) {
+      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+      //       wx.getUserInfo({
+      //         success: function(res) {
+      //           console.log(res, '==========')
+      //           self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权用户'})
+      //         }
+      //       })
+      //     }
+      //   }
+      // })
+      if(e.detail.userInfo){
+        self.$parent.globalData.authorize = true
+        wx.getUserInfo({
+          success: function(res) {
+            self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权登录'} )
+            wx.switchTab({
+              url: '/pages/user'
+            })
+          }
+        })
+      }
+      
+    }
+  }
+  onLoad() {
+    var self = this
+    wx.login({
+      success: function(res){
+        self.$parent.globalData.open_id = res.code
+      }
+    })
+    // 查看是否授权
+    // wx.getSetting({
+    //   success: function(res) {
+    //     console.log(res.authSetting['scope.userInfo'])
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+    //       wx.getUserInfo({
+    //         success: function(res) {
+    //           console.log(res, '==========')
+    //           self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权用户'})
+    //         }
+    //       })
+          
+    //     }
+    //   }
+    // })
+  }
+}
+</script>
+<style lang="less">
+  .popup{
+    width: 100vw;
+    height: 100vh;
+    padding-top: 100rpx;
+    box-sizing: border-box;
+    image{
+      width: 160rpx;
+      height: 260rpx;
+      display: block;
+      margin: 0 auto;
+    }
+    button{
+      width: 610rpx;
+      height: 100rpx;
+      line-height: 100rpx;
+      color: #fff;
+      font-size: 36rpx;
+      background-color: #5dbaa7;
+      border-radius: 50rpx;
+      letter-spacing: 5rpx;
+      margin-top: 60rpx;
+    }
+  }
+</style>

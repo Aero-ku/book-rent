@@ -1,0 +1,239 @@
+<template>
+  <view class="container">
+    <view class="user" @tap="goLogin">
+      <image class="user__avatar" src="{{ userInfo.avatarUrl ? userInfo.avatarUrl : '../images/icon/icon-avatar@2x.png'}}" background-size="cover"/>
+      <view class="user-info">
+        <view class="user-info__name">{{userInfo.nickName}}</view>
+        <view class="user-info__msg">{{userInfo.msg}}</view>
+      </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_9.png" style="" /></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>收藏图书</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_7.png"/></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>我的借阅</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_13.png" /></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>我的推广</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_6.png"/></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>借阅计划</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://img002.qufenqi.com/products/fd/ba/fdba26fc240cacaa5149cf75269f3f72.png"/></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>绘本回收</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_2.png"/></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>竹币兑换区</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="redirectLink">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_11.png"/></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>设置</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/user" class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:if="{{isLogined}}" @tap="loginOut">
+                <view class="weui-cell__hd"><image src="https://imagenew.qujie8.com/icon/coin/icon_my_12.png" /></view>
+                <view class="weui-cell__bd weui-cell_primary">
+                    <view>退出登录</view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  // import { service } from '../config.js'
+  // import http from '../mixins/http'
+  // import base from '../mixins/base'
+  
+  export default class User extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的'
+    }
+    data = {
+      userInfo: {
+        avatarUrl: '',
+        nickName: '未登录用户',
+        msg: '点击登录账号'
+      },
+      isLogined: false
+    }
+    methods = {
+      goLogin () {
+        console.log(this.isLogined)
+        if (!this.isLogined) {
+          wx.navigateTo({
+            url: '/pages/login/index'
+          })
+        }
+      },
+      loginOut () {
+        var self = this
+        wx.showModal({
+          title: '温馨提示',
+          content: '确定要退出登录？',
+          confirmText: '确认退出',
+          cancelText: '取消',
+          success: (res) => {
+            if (res.confirm) {
+              // 用户点击确认退出登录
+              // 调用退出登录接口
+              self.$parent.globalData.userInfo = null
+              self.$parent.globalData.authorize = false
+              self.$parent.globalData.userInfo = {
+                nickName: '未登录用户',
+                avatarUrl: '../images/icon/icon-avatar@2x.png',
+                msg: '点击登录账号'
+              }
+              wx.showLoading({
+                title: '退出登录中',
+                duration: 1000,
+                success: function() {
+                  wx.switchTab({
+                    url: '/pages/index'
+                  })
+                }
+              })
+              // this.$post({url: service.signOut}, {
+              //   success: ({code, data, message, statusCode}) => {
+              //     if (code === 0 && statusCode === 200) {
+              //       // 退出成功
+              //       // 清除 globalData.user 用户登录信息全局值
+              //       // 清除 setStorageSync 中保存的userInfo缓存
+              //       this.$parent.globalData.userInfo = null
+              //       this.$parent.globalData.mobileBindState = false
+              //       wx.setStorageSync('userInfo', null)
+
+              //       // 清除重置个人中心页面的显示数据
+              //       this.userInfo = {
+              //         nickName: '未登录用户',
+              //         avatarUrl: '../images/icon/icon-avatar@2x.png',
+              //         borrow_status_name: '借阅状态',
+              //         user_type_name: '',
+              //         remain_times: 0,
+              //         collect_count: 0
+              //       }
+              //       // 清除tabBarBrage标志
+              //       wx.removeTabBarBadge({
+              //         index: 1
+              //       })
+              //       wx.switchTab({
+              //         url: '/pages/index'
+              //       })
+              //     } else {
+              //       wx.showToast({
+              //         title: '退出失败，请稍后重试',
+              //         icon: 'none',
+              //         duration: 1000
+              //       })
+              //     }
+              //   },
+              //   fail: () => {
+              //     wx.showToast({
+              //       title: '退出失败，请稍后重试',
+              //       icon: 'none',
+              //       duration: 1000
+              //     })
+              //   },
+              //   complete: () => {
+              //     wx.hideLoading()
+              //   }
+              // })
+            }
+          }
+        })
+      },
+      redirectLink (e) {
+        if (!this.isLogined) {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none',
+            duration: 1000
+          })
+          return false
+        } else {
+
+        }
+      }
+    }
+    onShow () {
+      console.log(this.$parent.globalData)
+      this.userInfo = this.$parent.globalData.userInfo
+      this.isLogined = this.$parent.globalData.authorize
+    }
+  }
+</script>
+<style lang="less">
+page{
+  background: #efefef;
+}
+.container{
+  .user{
+    display: flex;
+    height: 160rpx;
+    background: #fff;
+    width: 100%;
+    &__avatar{
+      margin: 20rpx 30rpx;
+      flex: 0 0 100rpx;
+      height: 100rpx;
+      width: 100rpx;
+    }
+    &-info{
+      flex: 1;
+      margin: 20rpx 0;
+      &__name{
+        color: #5cbaa7;
+      }
+      &__msg{
+        font-size: 26rpx;
+        color: #999;
+      }
+    }
+  }
+}
+.weui-panel{
+  width: 100%;
+}
+.weui-cell__hd{
+  image{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align:text-bottom;
+  }
+}
+</style>

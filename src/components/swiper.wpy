@@ -1,0 +1,64 @@
+<template>
+  <swiper class="swiper" style="height:240rpx" autoplay="{{autoplay}}"
+    indicator-dots="{{indicatorDots}}" 
+    indicator-color="{{indicatorColor}}"
+    indicator-active-color="{{indicatorActiveColor}}">
+    <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
+      <swiper-item>
+        <navigator url="/pages/recycle/recycle">
+          <image src="{{item.image}}" style="height:240rpx" class="swiper-image" mode="widthFix"/>
+        </navigator>
+        <navigator url="{{item.url}}">
+          <image src="{{item.image}}" style="height:240rpx" class="swiper-image" mode="widthFix"/>
+        </navigator>
+        <view style="height:{{style_height}}">
+          <image src="{{item.image}}" style="height:240rpx" class="swiper-image" mode="aspectFit"/>
+        </view>
+        <navigator url="/pages/main/subscribe" openType="switchTab">
+          <image src="{{item.image}}" style="height:{{style_height}}" class="swiper-image" mode="widthFix" @tap="switchTo"/>
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+<script>
+import wepy from 'wepy'
+export default class borrow extends wepy.component {
+  data = {
+    autoplay: true,
+    indicatorDots: true,
+    indicatorColor: 'rgba(255, 255, 255, 0.6)',
+    indicatorActiveColor: 'rgba(255, 255, 255, 1)'
+  }
+  props = {
+    list: {
+      type: Object, 
+      default: []
+    },
+    navigate: {
+      type: Boolean,
+      default: true
+    }
+  }
+  methods = {
+
+  }
+  onLoad () {
+  }
+}
+</script>
+<style lang="less">
+swiper,
+.swiper{
+  width: 100%;
+}
+
+.swiper-image{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+//   background-size: contain;
+}
+</style>
