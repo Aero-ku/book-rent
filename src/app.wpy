@@ -14,16 +14,15 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
-
 export default class app extends wepy.app {
   config = {
     pages: [
-      'pages/index',
-      'pages/card',//购卡
-      'pages/borrow',//借书架
-      'pages/user',//个人中心
+      'pages/index', // 首页
+      'pages/card', // 购卡
+      'pages/borrow', // 借书架
+      'pages/user', // 个人中心
       'pages/login/index',
-      'pages/first-page'//首页
+      'pages/main/detail' // 图书详情
     ],
     window: {
       navigationBarTitleText: '满熊阅读',
@@ -38,9 +37,9 @@ export default class app extends wepy.app {
       selectedColor: '#79C9BA',
       backgroundColor: '#fff',
       borderStyle: 'black',
-      list:[
+      list: [
         {
-          pagePath: 'pages/first-page',
+          pagePath: 'pages/index',
           selectedIconPath: './images/tabbars/icon-mark-active@2x.png',
           iconPath: './images/tabbars/icon-mark@2x.png',
           text: '首页'

@@ -79,7 +79,7 @@
   // import http from '../mixins/http'
   // import base from '../mixins/base'
   
-  export default class User extends wepy.page {
+  export default class User extends wepy.page{
     config = {
       navigationBarTitleText: '我的'
     }

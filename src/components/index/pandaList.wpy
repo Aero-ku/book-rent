@@ -1,0 +1,64 @@
+<template>
+  <view class="list">
+    <view class="list-name">{{name}}</view>
+    <view class="list-all" @tap="goTo">全部</view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class pandaList extends wepy.component{
+  props = {
+    name: {
+      type: String,
+      default: ''
+    },
+    url: {
+      type: String,
+      default: ''
+    }
+  }
+
+  data = {
+
+  }
+
+  methods = {
+    goTo () {
+
+      wx.navigateTo({
+        url: this.url
+      })
+    }
+  }
+}
+</script>
+<style lang="less">
+  .list{
+    height: 66rpx;
+    line-height: 66rpx;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rpx;
+    &-name{
+      font-size: 32rpx;
+      color: #1d1d1d;
+      font-weight: 600
+    }
+    &-all{
+      border-radius: 20rpx;
+      border: 1rpx solid #bababa;
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #1d1d1d;
+      height: 40rpx;
+      line-height: 40rpx;
+      width: 74rpx;
+      text-align: center;
+      margin-top: 12rpx;      
+    }
+  }
+</style>
+
+

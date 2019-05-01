@@ -30,24 +30,23 @@ export default class loginPage extends wepy.page {
       //     }
       //   }
       // })
-      if(e.detail.userInfo){
+      if (e.detail.userInfo) {
         self.$parent.globalData.authorize = true
         wx.getUserInfo({
           success: function(res) {
-            self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权登录'} )
+            self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权登录'})
             wx.switchTab({
-              url: '/pages/user'
+              url: '/pages/index'
             })
           }
         })
       }
-      
     }
   }
   onLoad() {
     var self = this
     wx.login({
-      success: function(res){
+      success: function (res) {
         self.$parent.globalData.open_id = res.code
       }
     })
@@ -63,7 +62,6 @@ export default class loginPage extends wepy.page {
     //           self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权用户'})
     //         }
     //       })
-          
     //     }
     //   }
     // })

@@ -1,0 +1,54 @@
+<template>
+  <view class="recommend-list">
+    <view class="recommend-item">获奖名著</view>
+    <view class="recommend-item">名家大师</view>
+    <view class="recommend-item">豆瓣8.5</view>
+    <view class="recommend-item">热门图书</view>
+    <view class="recommend-item">品格塑造</view>
+    <view class="recommend-item">自我保护</view>
+    <view class="recommend-item">热门动画</view>
+    <view class="recommend-item">科普百科</view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class recommentSort extends wepy.component {
+  props = {
+    list: {
+      type: Array,
+      default: []
+    }
+  }
+  data = {
+
+  }
+}
+</script>
+<style lang="less" scoped>
+  .recommend-list{
+    display: flex;
+    flex-wrap: wrap;
+    view{
+      width: 152rpx;
+      height: 80rpx;
+      margin-right: 30rpx;
+      margin-bottom: 16rpx;
+      color: #1d1d1d;
+      background: rgb(245, 245, 245);
+      font-size: 28rpx;
+      color: #1d1d1d;
+      font-weight: 400;
+      line-height: 80rpx;
+      text-align: center;
+      border-radius: 8rpx;
+    }
+    & view:nth-child(4){
+      margin-right: 0;
+    }
+    & view:nth-child(8){
+      margin-right: 0;
+    }
+  }
+</style>
+
+

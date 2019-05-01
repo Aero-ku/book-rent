@@ -50,7 +50,7 @@
 .category{
   position: relative;
   width: 100%;
-  border-bottom: 20rpx solid #EFEFF4;
+  border-bottom: 10rpx solid #fff;
   font-size: 14px;
   background: #fff;
 }
@@ -76,5 +76,16 @@
 }
 .category-text{
   color: #999;
+}
+.clearfix{
+  &:before,
+  &:after{
+    content: '';
+    display: table;
+  }
+
+  &:after{
+    clear: both;
+  }
 }
 </style>

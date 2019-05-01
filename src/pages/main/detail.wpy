@@ -1,0 +1,20 @@
+<template>
+  <view>hello</view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class details extends wepy.page {
+  config = {
+    navigationBarTitleText: '图书详情',
+  }
+  data = {
+    id: ''
+  }
+  onLoad (query) {
+    console.log('query', query)
+    const id = query && + query.id
+    this.id = id || this.id || 0
+  }
+}
+</script>
+
