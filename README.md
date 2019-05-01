@@ -1,12 +1,13 @@
 # book-rent
 基于wepy.js的在线图书租赁小程序
 
+## 效果预览
+![首页展示](./src/images/readme/index.gif)
 ## 体验步骤
 ### 1、安装 wepy脚手架
 ```
 npm install wepy-cli -g
 ```
-
 ### 2、下载源代码
 ```
 git clone https://github.com/Aero-ku/book-rent.git
