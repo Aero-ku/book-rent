@@ -1,13 +1,13 @@
 <template>
   <view class="book-list">
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
+      <view class="weui-panel__bd" wx:for="{{list}}" wx:for-item="item" wx:key="{{list.id}}">
         <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="https://imagenew.qujie8.com/panda/e4/a7/a7ce1e2c7c660d4ed6a0113d021148e4.jpg" />
+            <image class="weui-media-box__thumb" src="{{item.image}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">奇奇好棒-我喜欢安妮</view>
+              <view class="weui-media-box__title">{{item.name}}</view>
                 <view class="weui-media-box__desc">
                 <view class="author">[比]G.V西纳顿 著</view>
                 <view class="score">豆瓣评分：8.2</view>
@@ -16,43 +16,12 @@
           </view>
         </navigator>
         <view class="add-shelf">
-          <image src="../../images/tabbars/icon-shelf@2x.png" @tap="choose"/>
-        </view>
-      </view>
-      <view class="weui-panel__bd">
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="https://imagenew.qujie8.com/panda/e4/a7/a7ce1e2c7c660d4ed6a0113d021148e4.jpg" />
+          <view wx:if="{{item.hasExist}}" @tap.stop="exist">
+            <image src="../../images/tabbars/icon-shelf@2x.png"/>
           </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">奇奇好棒-我喜欢安妮</view>
-                <view class="weui-media-box__desc">
-                <view class="author">[比]G.V西纳顿 著</view>
-                <view class="score">豆瓣评分：8.2</view>
-                <view class="desc">"奇奇好想和安妮成为好朋友，一起玩耍玩耍呀呀呀呀呀呀呀呀"</view>
-              </view>
+          <view wx:else @tap.stop="addToShelf({{item}}, {{index}})">
+            <image src="../../images/tabbars/icon-shelf-active@2x.png"/>
           </view>
-        </navigator>
-        <view class="add-shelf">
-          <image src="../../images/tabbars/icon-shelf@2x.png" @tap="choose"/>
-        </view>
-      </view>
-      <view class="weui-panel__bd">
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="https://imagenew.qujie8.com/panda/e4/a7/a7ce1e2c7c660d4ed6a0113d021148e4.jpg" />
-          </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">奇奇好棒-我喜欢安妮</view>
-                <view class="weui-media-box__desc">
-                <view class="author">[比]G.V西纳顿 著</view>
-                <view class="score">豆瓣评分：8.2</view>
-                <view class="desc">"奇奇好想和安妮成为好朋友，一起玩耍玩耍呀呀呀呀呀呀呀呀"</view>
-              </view>
-          </view>
-        </navigator>
-        <view class="add-shelf">
-          <image src="../../images/tabbars/icon-shelf@2x.png" @tap="choose"/>
         </view>
       </view>
     </view>
@@ -61,16 +30,35 @@
 <script>
   import wepy from 'wepy'
   export default class bookRecommend extends wepy.component {
+    data = {
+      imgUrl: '../images/tabbars/icon-shelf@2x.png',
+      selected: false
+    }
+    props = {
+      list: {
+        type: Array,
+        default: []
+      }
+    }
     methods = {
-      choose() {
-        console.log('choose')
-      } 
+      addToShelf(book, index) {
+        console.log(book, index)
+        this.list[index].hasExist = true
+        this._setCartBadge()
+      },
+      exist() {
+        wx.showToast({
+          title: '已在书架中',
+          icon: 'none',
+          duration: 1000
+        })
+      }
     }
     // 设置底部菜单中书架商品数量标志
     _setCartBadge() {
       // 更新globalData书架总量数据
-      this.$parent.$parent.globalData.bookCartTotalNum += 1
-      let len = this.$parent.$parent.globalData.bookCartTotalNum
+      this.$parent.$parent.globalData.bookShelfTotalNum += 1
+      let len = this.$parent.$parent.globalData.bookShelfTotalNum
       if (len > 0) {
         wx.setTabBarBadge({
           index: 2,
@@ -147,5 +135,3 @@
   }
 }
 </style>
-
-

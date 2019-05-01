@@ -73,7 +73,9 @@ export default class app extends wepy.app {
       msg: '点击登录账号'
     },
     authorize: false,
-    open_id: ''
+    open_id: '',
+    // 借书架书本数量
+    bookShelfTotalNum: 0
   }
 
   constructor () {
