@@ -1,62 +1,392 @@
 <template>
   <view class="container">
-    <view wx:if="{{isLogin}}">
-      <view wx:if="{{borrowList.length}}">
-      </view>
-      <view wx:else class="text-center tip-page main-borrow-tip">
-        <block>
-          <icon class="tip-icon" type="cancel" size="70" color="#bbb"></icon>
-          <view class="h4">您的书架为空，快去借阅吧~</view>
-        <button @tap="goBorrow" class="weui-btn mini-btn btn-position" type="primary" size="mini">立即借阅</button>
-      </block>
+    <view class="address-item">
+      <view @tap="chooseAddress">
+        <view wx:if="{{showAddressInfo}}" class="weui-cell address-wrap">
+          <view class="icon-wrap">
+            <image class="address-icon" src="../images/new/location.png" mode="aspectFit"></image>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft_in-access">
+            <view class="name-phone">
+              <view class="receiver-name h4">收件人：{{receiver}}</view>
+              <view class="receiver-phone h4">{{phone}}</view>
+            </view>
+            <view class="address h4 color-333"><text>{{address}}</text></view>
+          </view>
+        </view>
+        <view wx:else class="weui-cell">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label h4 reset-label-left">收货地址</view>
+          </view>
+          <view class="weui-cell__bd weui-cell__ft_in-access h4 deliver-info">
+            请填写收货地址
+          </view>
+        </view>
       </view>
     </view>
-    <view wx:else>
-      <noLogin></noLogin>
+    <view class="cart-item">
+      <view class="weui-cell">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label h4 reset-label-left">借阅卡:</view>
+        </view>
+        <view class="weui-cell__bd weui-cell__ft_in-access h4 deliver-info" @tap="buyCart">
+          暂无可用借阅卡
+        </view>
+      </view>
+    </view>
+    <view class="weui-panel filling">
+      <view class="weui-panel__bd">
+        <checkbox-group bindchange="checkboxChange">
+          <view wx:for="{{borrowList}}" wx:key="index" class="weui-cell book-item">
+            <checkbox id="{{unique}}-{{index}}" hidden value="{{item.book_id}}" checked="{{item.checked}}"/>
+            <block wx:if="{{!item.stock}}">
+              <view class="check-wrap">
+                <view class="sell-out">
+                  <view class="sell-text">已借完</view>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <label for="{{unique}}-{{index}}" class="check-wrap">
+                <icon wx:if="{{item.checked}}" class="weui-icon-checkbox_success" type="success" size="18" color="#5cbaa7"></icon>
+                <icon wx:else class="weui-icon-checkbox_circle" type="circle" size="18"></icon>
+              </label>
+            </block>
+            <navigator url="/pages/main/detail?id={{item.book_id}}" class="cart-book-navigator">
+              <view class="cart-book">
+                <view class="book-img-wrap">
+                  <view wx:if="{{item.hasBorrow}}" class="coupon-expired">已借阅</view>
+                  <image class="book-img" src="{{item.book_image}}" mode="aspectFit" />
+                </view>
+                <view class="book-title">{{item.book_name}}</view>
+              </view>
+            </navigator>
+            <image src="../images/icon/icon-trash-64px.png" class="trash" />
+          </view>
+        </checkbox-group>
+      </view>
+    </view>
+    <view class="bottom">
+        <label for="all" class="check-wrap-all">
+          <icon wx:if="{{selectAllState}}" class="weui-icon-checkbox_success" type="success" size="18" color="#5cbaa7"></icon>
+          <icon wx:else class="weui-icon-checkbox_circle" type="circle" size="18"></icon>
+          <view class="select-txt">
+            <text wx:if="{{!selectAllState}}">全选</text>
+            <text wx:else>取消全选</text>
+          </view>
+        </label>
+      <checkbox-group bindchange="selectAllChange">
+        <checkbox hidden checked="{{selectAllState}}" value="select" id="all"/>
+      </checkbox-group>
+      <button class="btn" @tap="goBuy">下单</button>
     </view>
   </view>
-
 </template>
 <script>
-  import wepy from 'wepy'
-  import noLogin from '../components/noLogin'
-  export default class borrow extends wepy.page {
-    config = {
-      navigationBarTitleText: '书架'
-    }
-    data = {
-      isLogin: false,
-      borrowList: []
-    }
-    methods = {
-      goBorrow () {
-        console.log('=================')
-        wx.switchTab({
-          url: '/pages/first-page'
-        })
-      }
-    }
-    components = {
-      noLogin
-    }
-    onShow () {
-      console.log(this.$parent.globalData.authorize)
-      console.log('hahah')
-      this.isLogin = this.$parent.globalData.authorize
+import wepy from 'wepy'
+export default class borrow extends wepy.page {
+  config = {
+    navigationBarTitleText: '借书架'
+  }
+  data = {
+    logined: false,
+    phone: '',
+    receiver: '',
+    address: '',
+    clickCount: 0,
+    selectAllState: false,
+    borrowList: [
+      {book_id: '276', book_name: '《科学爆炸啦—画家叔叔笔下的春夏秋冬', book_image: 'http://imagenew.qujie8.com/panda/6f/d8/d82a3badd7cfbd15bac35664eb55186f.png', stock: 44, cut_price: 76},
+      {book_id: '127', book_name: '《儿童情绪管理—不想伤心的男孩 》', book_image: 'http://imagenew.qujie8.com//uploads/20170622151340-594b6e240e301.png', stock: 23, cut_price: 45},
+      {book_id: '16', book_name: '《科学爆炸啦—画家叔叔笔下的春夏秋冬', book_image: 'http://imagenew.qujie8.com/panda/6f/d8/d82a3badd7cfbd15bac35664eb55186f.png', stock: 44, cut_price: 31},
+      {book_id: '347', book_name: '《儿童情绪管理—不想伤心的男孩 》', book_image: 'http://imagenew.qujie8.com//uploads/20170622151340-594b6e240e301.png', stock: 23, cut_price: 123}
+    ]
+  }
+  onShow () {
+    console.log('parent', this.$parent.globalData.authorize)
+    this.logined = this.$parent.globalData.authorize
+  }
+  computed = {
+    showAddressInfo() {
+      return this.address && this.phone && this.receiver
     }
   }
+  isPhone(str) {
+    return /^1\d{10}$/.test(str)
+  }
+  // 修改选中图书项目
+  selectBookCartItem(bookIdArr) {
+    let selectBooks = this.getArray(bookIdArr, [])
+    let borrowList = this.borrowList
+    this.selectCount = bookIdArr.length
+    for (let i = borrowList.length - 1; i >= 0; i--) {
+      if (selectBooks.indexOf(borrowList[i].book_id) >= 0) {
+        borrowList[i].checked = true
+      } else {
+        borrowList[i].checked = false
+      }
+    }
+  }
+  getArray(item, defaultArr) {
+    return this.isArray(item) ? item : defaultArr || []
+  }
+  isArray(item) {
+    return Object.prototype.toString.apply(item) === '[object Array]'
+  }
+  methods = {
+    checkboxChange(e) {
+      console.log(e.detail)
+      console.log('checkbox发生change事件，携带value值为：', e.detail.value, this.borrowList.length)
+      this.selectBookCartItem(e.detail.value)
+      if (e.detail.value.length < this.borrowList.length) {
+        this.selectAllState = false
+      }
+    },
+    chooseAddress() {
+      let addressFlag = false
+      let self = this
+      this.clickCount++
+      // 获取用户授权相关信息
+      wx.getSetting({
+        success (res) {
+          // console.log('scope.address', res.authSetting.scope.address) //错误
+          console.log('scope.address', res.authSetting['scope.address']) // 正确
+          addressFlag = (res.authSetting['scope.address'] + '') !== 'false'
+          if (!addressFlag && self.clickCount > 1) {
+            wx.openSetting({
+              success(res) {
+                console.log('wx.setSetting', res)
+                res.authSetting = {
+                  'scope.address': true
+                }
+              }
+            })
+          }
+        }
+      })
+      console.log('addressFlag', addressFlag, 'clickCount:', this.clickCount)
+      console.log('当前登录的用户类型', this.isPhone(this.$parent.globalData.userInfo.session3rd), this.$parent.globalData.userInfo.session3rd)
+      if (wx.chooseAddress && !this.isPhone(this.$parent.globalData.userInfo.session3rd)) {
+        // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.address" 这个 scope
+        wx.chooseAddress({
+          success: (res) => {
+            const {
+              // 收货人姓名
+              userName,
+              // 手机号
+              telNumber,
+              // 国标收货地址第一级地址
+              provinceName,
+              // 国标收货地址第二级地址
+              cityName,
+              // 国标收货地址第三级地址
+              countyName,
+              // 详细收货地址信息
+              detailInfo,
+              // 收货地址国家码
+              // nationalCode,
+              // 邮编
+              postalCode
+            } = res
+
+            this.address = [
+              provinceName,
+              cityName,
+              countyName,
+              detailInfo,
+              postalCode
+            ].join(' ')
+            this.receiver = userName || this.receiver
+            this.phone = telNumber || this.phone
+            this.$apply()
+          },
+          fail: (res) => {
+          }
+        })
+      } else {
+        let info = {
+          address: this.getString(this.address),
+          receiver: this.getString(this.receiver),
+          phone: this.getString(this.phone)
+        }
+        wx.navigateTo({url: `/pages/main/address?info=${JSON.stringify(info)}`})
+      }
+    },
+    // 全选、取消全选
+    selectAllChange(e) {
+      console.log('selectAllChange事件，携带value值为：', e.detail.value)
+      this.selectAllState = !this.selectAllState
+      let idsArr = []
+      let len = this.borrowList.length
+      if (e.detail.value[0] === 'select') {
+        for (let i = len - 1; i >= 0; i--) {
+          idsArr.push(this.borrowList[i].book_id)
+        }
+      }
+      this.selectBookCartItem(idsArr)
+    },
+    // 跳转购卡页
+    buyCart() {
+      wx.switchTab({
+        url: '/pages/card'
+      })
+    }
+  }
+}
 </script>
-<style lang="less" scoped>
- .main-borrow-tip{
-    background-color: transparent;
-    text-align:center;
-    .tip-icon{
-      margin-top: 10vh;
-      // margin-left: 50%;
-      // transform: translateX(-50%);
+<style lang="less">
+page{
+  background: #efefef;
+}
+  button, view, text{
+    font-weight: 400;
+  }
+  .deliver-info{
+    text-align: right;
+    height: 1.4rem;
+    line-height: 1.4rem;
+  }
+  .reset-label-left{
+    color: #999;
+    margin-right:1em;
+    padding-right: 1em;
+    border-right: 1rpx solid #ccc;
+  }
+  .address-item, .cart-item{
+    margin-top: 0;
+    background: #fff;
+    width: 100vw;
+    font-size: 28rpx;
+    margin-bottom: 16rpx;
+  }
+  .address-icon{
+    width: 50rpx;
+    height: 50rpx;
+  }
+  .name-phone{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16rpx;
+    color: #1d1d1d;
+    font-size: 32rpx;
+    .receiver-name, .receiver-phone{
+      font-weight: 400;
+      
     }
-    .btn-position{
-      margin-top: 120rpx;
+  }
+  .address{
+    padding: 0 16rpx;
+    color: #4a4a4a;
+    text{ 
+      font-size: 24rpx;
     }
- }
+  }
+  .reset-label-left{
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .weui-label{
+    width: 130rpx;
+  }
+  .book-item{
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    padding-left: 0rpx;
+    padding-right: 0rpx;
+    width: 100vw;
+  }
+  .check-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+  }
+  .sell-out{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .sell-text{
+      font-size: 20rpx;
+      color: #999999;
+      line-height: 1;
+    }
+  }
+  .book-img-wrap{
+    float: left;
+    margin-right: 8rpx;
+    .book-img{
+      display: block;
+      width: 99rpx;
+      height: 132rpx;
+    }
+  }
+  .cart-book-navigator{
+    flex-grow: 1;
+  }
+  .cart-book{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+  .trash{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 28rpx;
+    bottom: 12rpx;
+    width: 32rpx;
+    height: 38rpx;
+    padding: 22rpx;
+  }
+  .book-title{
+    font-size: 24rpx;
+    font-weight: 400;
+    max-width: 500rpx;
+  }
+  .bottom{
+    position: fixed;
+    display: flex;
+    box-sizing: border-box;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    height: 90rpx;
+    width: 100vw;
+    background: #fff;
+    padding: 0 16rpx;
+    justify-content: space-between;
+  }
+  .check-wrap-all{
+    height: 90rpx;
+    align-self: center;
+  }
+  .select-txt{
+    display: inline;
+    font-size: 24rpx;
+    font-weight: 400;
+    color: #1d1d1d;
+    margin-left: 12rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+  }
+  checkbox-group{
+    display: inline-block;
+  }
+  .btn{
+    // position: absolute;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 160rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+    border: 1px solid #17b393;
+    color: #17b393;
+    background: #fff;
+    font-size: 32rpx;
+    align-self: center;
+  }
 </style>

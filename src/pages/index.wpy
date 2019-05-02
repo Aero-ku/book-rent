@@ -68,12 +68,12 @@ export default class firstPage extends wepy.page {
       { title: '竹币商城', image: '../images/category/icon-cate-new@2x.png' }
     ],
     bookList: [
-      {id: '1', image: 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg', name: '《奇奇好棒—我喜欢安妮》', hasExist: true},
+      {id: '1', image: 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg', name: '《奇奇好棒—我喜欢安妮》', hasExist: false},
       {id: '466', image: 'https://imagenew.qujie8.com/panda/ed/18/1856424beb86c78d8d13c4ec30e143ed.jpg', name: '《子儿，吐吐》', hasExist: false},
       {id: '94', image: 'https://imagenew.qujie8.com//uploads/20170622142422-594b62969927e.png', name: '《儿童情绪管理—我不怕疼》', hasExist: false},
       {id: '16', image: 'https://imagenew.qujie8.com/panda/32/ee/ee3c40bd16b085aced8acbd01565fb32.jpg', name: '《香喷喷食育绘本—让我更强壮的食物》', hasExist: false},
-      {id: '532', image: 'https://imagenew.qujie8.com/panda/ad/68/687a3c8b4ee444990e0c8b9cdc2e6ead.jpg', name: '《小熊宝宝绘本—洗澡》', hasExist: true},
-      {id: '232', image: 'https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png', name: '《心灵养育绘本Ⅱ送玩具回家》', hasExist: true}
+      {id: '532', image: 'https://imagenew.qujie8.com/panda/ad/68/687a3c8b4ee444990e0c8b9cdc2e6ead.jpg', name: '《小熊宝宝绘本—洗澡》', hasExist: false},
+      {id: '232', image: 'https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png', name: '《心灵养育绘本Ⅱ送玩具回家》', hasExist: false}
     ],
     catedata: {
       cate_1: [
