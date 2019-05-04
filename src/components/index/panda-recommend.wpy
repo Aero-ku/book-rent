@@ -4,14 +4,14 @@
       <view class="weui-panel__bd" wx:for="{{list}}" wx:for-item="item" wx:key="{{list.id}}">
         <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="{{item.image}}" />
+            <image class="weui-media-box__thumb" src="{{item.book_image}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">{{item.name}}</view>
+              <view class="weui-media-box__title">{{item.book_name}}</view>
                 <view class="weui-media-box__desc">
-                <view class="author">[比]G.V西纳顿 著</view>
-                <view class="score">豆瓣评分：8.2</view>
-                <view class="desc">"奇奇好想和安妮成为好朋友，一起玩耍玩耍呀呀呀呀呀呀呀呀"</view>
+                <view class="author">{{item.book_author}}</view>
+                <view class="score">豆瓣评分：{{item.score}}</view>
+                <view class="desc">{{item.desc}}</view>
               </view>
           </view>
         </navigator>
@@ -69,12 +69,12 @@
       let len = this.$parent.$parent.globalData.bookShelfTotalNum
       if (len > 0) {
         wx.setTabBarBadge({
-          index: 2,
+          index: 1,
           text: `${len}`
         })
       } else {
         wx.removeTabBarBadge({
-          index: 2
+          index: 1
         })
       }
     }

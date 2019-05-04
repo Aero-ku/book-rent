@@ -29,7 +29,7 @@
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
           <view class="weui-label h4 reset-label-left">借阅卡:</view>
         </view>
-        <view class="weui-cell__bd weui-cell__ft_in-access h4 deliver-info" @tap="buyCart">
+        <view class="weui-cell__bd weui-cell__ft_in-access h4 deliver-info">
           暂无可用借阅卡
         </view>
       </view>
@@ -224,12 +224,6 @@ export default class borrow extends wepy.page {
         }
       }
       this.selectBookCartItem(idsArr)
-    },
-    // 跳转购卡页
-    buyCart() {
-      wx.switchTab({
-        url: '/pages/card'
-      })
     }
   }
 }
@@ -258,6 +252,9 @@ page{
     width: 100vw;
     font-size: 28rpx;
     margin-bottom: 16rpx;
+  }
+  .cart-item{
+    margin-bottom: 0rpx;
   }
   .address-icon{
     width: 50rpx;

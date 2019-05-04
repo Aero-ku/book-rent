@@ -110,13 +110,17 @@ export default class firstPage extends wepy.page {
   }
   onLoad () {
     console.log(this.list)
+    this.initPageData()
   }
   initPageData() {
+    let self = this
     wx.request({
       url: 'http://localhost:12306/findAll',
       method: 'get',
       success(res) {
         console.log('res: ', res)
+        self.bookList = res.data
+        console.log(self.bookList)
       }
     })
   }

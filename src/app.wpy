@@ -26,8 +26,8 @@ export default class app extends wepy.app {
     ],
     window: {
       navigationBarTitleText: '满熊阅读',
-      navigationBarTextStyle: 'white',
-      navigationBarBackgroundColor: '#5cbaa7',
+      navigationBarTextStyle: 'black',
+      navigationBarBackgroundColor: '#fff',
       backgroundColor: '#eaeaea',
       backgroundTextStyle: 'light',
       enablePullDownRefresh: true
@@ -43,12 +43,6 @@ export default class app extends wepy.app {
           selectedIconPath: './images/tabbars/icon-mark-active@2x.png',
           iconPath: './images/tabbars/icon-mark@2x.png',
           text: '首页'
-        },
-        {
-          pagePath: 'pages/card',
-          selectedIconPath: './images/tabbars/icon-buy-active@2x.png',
-          iconPath: './images/tabbars/icon-buy@2x.png',
-          text: '购卡'
         },
         {
           pagePath: 'pages/borrow',

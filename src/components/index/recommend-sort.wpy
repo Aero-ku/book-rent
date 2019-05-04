@@ -1,13 +1,13 @@
 <template>
   <view class="recommend-list">
-    <view class="recommend-item">获奖名著</view>
-    <view class="recommend-item">名家大师</view>
-    <view class="recommend-item">豆瓣8.5</view>
-    <view class="recommend-item">热门图书</view>
-    <view class="recommend-item">品格塑造</view>
+    <view class="recommend-item">情感认知</view>
+    <view class="recommend-item">习惯养成</view>
     <view class="recommend-item">自我保护</view>
-    <view class="recommend-item">热门动画</view>
+    <view class="recommend-item">品格塑造</view>
+    <view class="recommend-item">幽默趣味</view>
+    <view class="recommend-item">情绪管理</view>
     <view class="recommend-item">科普百科</view>
+    <view class="recommend-item">双语绘本</view>
   </view>
 </template>
 <script>
@@ -50,5 +50,3 @@ export default class recommentSort extends wepy.component {
     }
   }
 </style>
-
-

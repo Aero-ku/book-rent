@@ -1,5 +1,7 @@
 <template>
-  <view>hello</view>
+  <view class="container">
+    
+  </view>
 </template>
 <script>
 import wepy from 'wepy'
