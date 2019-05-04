@@ -39,6 +39,7 @@ export default class details extends wepy.page {
   }
   data = {
     book_id: '',
+    userInfo: {},
     book: {},
     stored: false
   }
@@ -46,25 +47,48 @@ export default class details extends wepy.page {
     console.log('query', query)
     const id = query && +query.book_id
     this.book_id = id || this.book_id || 0
+    this.userInfo = this.$parent.globalData.userInfo
     this.initPageData()
   }
   methods = {
     storeBook() {
-      if(this.$parent.globalData.authorize){
-        this.stored = !this.stored
-        if (this.stored) {
-          wx.showToast({
-            title: '添加收藏！',
-            icon: 'success',
-            duration: 1000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏！',
-            icon: 'none',
-            duration: 1000
-          })
-        }
+      const self = this
+      self.stored = !self.stored
+      if (this.$parent.globalData.authorize) {
+        const { nickName } = this.userInfo
+        wx.request({
+          url: 'http://localhost:12306/storeBook',
+          data: {
+            user_name: nickName,
+            book_id: self.book_id
+          },
+          method: 'get',
+          success(res) {
+            console.log('收藏请求响应内容：', res)
+            if (res.statusCode === 200) {
+              console.log('self.stored', self.stored)
+              wx.showToast({
+                title: '添加收藏！',
+                icon: 'success',
+                duration: 1000
+              })
+            }
+          }
+        })
+        // this.stored = !this.stored
+        // if (this.stored) {
+        //   wx.showToast({
+        //     title: '添加收藏！',
+        //     icon: 'success',
+        //     duration: 1000
+        //   })
+        // } else {
+        //   wx.showToast({
+        //     title: '取消收藏！',
+        //     icon: 'none',
+        //     duration: 1000
+        //   })
+        // }
       } else {
         wx.showModal({
           title: '请先登录',
@@ -72,7 +96,7 @@ export default class details extends wepy.page {
           showCancel: true,
           confirmText: '去登录',
           confirmColor: '#17b393',
-          success: function(){
+          success: function() {
             wx.navigateTo({
               url: '/pages/login/index'
             })

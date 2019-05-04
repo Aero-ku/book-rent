@@ -120,9 +120,6 @@ export default class firstPage extends wepy.page {
       header: {
         'content-type': 'application/json'
       },
-      data: {
-        "book_id": '你猜哈哈哈'
-      },
       success(res) {
         console.log('res: ', res)
         self.bookList = res.data
