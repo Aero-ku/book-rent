@@ -19,7 +19,8 @@
     </view>
     <view class="bottom">
       <view class="store">
-        <image src="../../images/new/icon_cang@2x.png" class="img"/>
+        <image src="../../images/new/icon_cang@2x.png" class="img" @tap="storeBook" wx:if="{{!stored}}"/>
+        <image src="../../images/new/icon_cangu@2x.png" class="img" @tap="storeBook" wx:else/>
       </view>
       <view class="go-shelf">
         <image src="../../images/new/icon_3u@2x.png" class="img"/>
@@ -37,29 +38,61 @@ export default class details extends wepy.page {
     navigationBarTitleText: '图书详情'
   }
   data = {
-    id: '',
-    book: {
-      'book_id': 1,
-      'book_name': '奇奇好棒，我喜欢安妮',
-      'book_author': '[比]G.V西纳顿 著；西安曲江培豪',
-      'book_image': 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg',
-      'book_rent': 10,
-      'book_tag': [
-        '4-6岁',
-        '情感认知',
-        '双语绘本'
-      ],
-      'pub_date': '2016-05-01',
-      'publisher': '陕西人民出版社',
-      'score': '8.5',
-      'type': 1,
-      'desc': '奇奇好想和安妮成为好朋友，一起做游戏，可是他总是没有勇气去跟安妮打招呼。奇奇既害羞有担心，他想了很多很多...... 奇奇能和安妮成为好朋友么？  自信，积极，敞开心扉，交朋友并不难。'
-    }
+    book_id: '',
+    book: {},
+    stored: false
   }
   onLoad (query) {
     console.log('query', query)
     const id = query && +query.book_id
-    this.id = id || this.id || 0
+    this.book_id = id || this.book_id || 0
+    this.initPageData()
+  }
+  methods = {
+    storeBook() {
+      if(this.$parent.globalData.authorize){
+        this.stored = !this.stored
+        if (this.stored) {
+          wx.showToast({
+            title: '添加收藏！',
+            icon: 'success',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: '取消收藏！',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      } else {
+        wx.showModal({
+          title: '请先登录',
+          content: '是否现在就去登录？',
+          showCancel: true,
+          confirmText: '去登录',
+          confirmColor: '#17b393',
+          success: function(){
+            wx.navigateTo({
+              url: '/pages/login/index'
+            })
+          }
+        })
+      }
+    }
+  }
+  initPageData() {
+    const self = this
+    wx.request({
+      url: 'http://localhost:12306/getBookDetail',
+      data: {
+        book_id: this.book_id
+      },
+      method: 'get',
+      success(res) {
+        self.book = res.data[0]
+      }
+    })
   }
 }
 </script>
@@ -161,16 +194,18 @@ export default class details extends wepy.page {
       text-align: center;
       border-right: 1px solid #979797;
       .img{
-        // margin-top:20rpx;
+        position: absolute;
+        top: 10rpx;
+        left: 32rpx;
         width: 50rpx;
         height: 50rpx;
-        transform: translateY(-10rpx)
+        padding: 15rpx;
       }
     }
     .go-shelf{
       width: 160rpx;
       text-align: center;
-      margin-top: 18rpx;
+      margin-top: 22rpx;
       .img{
         width: 50rpx;
         height: 50rpx;

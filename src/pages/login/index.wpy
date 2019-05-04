@@ -11,7 +11,7 @@ export default class loginPage extends wepy.page {
     navigationBarTitleText: '登录'
   }
   data = {
-
+    open_id: ''
   }
   methods = {
     bindGetUserInfo (e) {
@@ -35,8 +35,23 @@ export default class loginPage extends wepy.page {
         wx.getUserInfo({
           success: function(res) {
             self.$parent.globalData.userInfo = Object.assign({}, res.userInfo, {msg: '微信授权登录'})
-            wx.switchTab({
-              url: '/pages/index'
+            console.log(res.userInfo)
+            const { province, city } = res.userInfo
+            wx.request({
+              url: 'http://localhost:12306/login',
+              data: {
+                user_id: self.user_id,
+                province,
+                city
+              },
+              success(res) {
+                console.log(res.statusCode === 200, 'res', res)
+                if (res.statusCode === 200) {
+                  wx.switchTab({
+                    url: '/pages/index'
+                  })
+                }
+              }
             })
           }
         })
@@ -48,6 +63,7 @@ export default class loginPage extends wepy.page {
     wx.login({
       success: function (res) {
         self.$parent.globalData.open_id = res.code
+        self.open_id = res.code
       }
     })
     // 查看是否授权
