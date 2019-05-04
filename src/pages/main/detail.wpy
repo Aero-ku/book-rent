@@ -1,22 +1,193 @@
 <template>
   <view class="container">
-    
+    <view class="img-wrap">
+      <image class="img" src="{{book.book_image}}" /> 
+    </view>
+    <view class="book-msg">
+      <view class="book-msg__name">{{book.book_name}}</view>
+      <view class="book-msg__rent">市场价：<text class="book-rent">￥{{book.book_rent}}</text></view>
+      <view class="book-msg__author">作者：{{book.book_author}}</view>
+      <view class="book-msg__publisher">出版：{{book.publisher}}</view>
+      <view class="book-msg__score">豆瓣：{{book.score}}</view>
+      <view class="book-msg__sort">分类：
+        <text class="sort-item" wx:for="{{book.book_tag}}" wx:for-item="item" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+    <view class="book-desc">
+      <view class="desc__title">绘本介绍</view>
+      <view class="desc__content">{{book.desc}}</view>
+    </view>
+    <view class="bottom">
+      <view class="store">
+        <image src="../../images/new/icon_cang@2x.png" class="img"/>
+      </view>
+      <view class="go-shelf">
+        <image src="../../images/new/icon_3u@2x.png" class="img"/>
+      </view>
+      <view class="add-shelf">
+        <button>加入借书架</button>
+      </view>
+    </view>
   </view>
 </template>
 <script>
 import wepy from 'wepy'
 export default class details extends wepy.page {
   config = {
-    navigationBarTitleText: '图书详情',
+    navigationBarTitleText: '图书详情'
   }
   data = {
-    id: ''
+    id: '',
+    book: {
+      'book_id': 1,
+      'book_name': '奇奇好棒，我喜欢安妮',
+      'book_author': '[比]G.V西纳顿 著；西安曲江培豪',
+      'book_image': 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg',
+      'book_rent': 10,
+      'book_tag': [
+        '4-6岁',
+        '情感认知',
+        '双语绘本'
+      ],
+      'pub_date': '2016-05-01',
+      'publisher': '陕西人民出版社',
+      'score': '8.5',
+      'type': 1,
+      'desc': '奇奇好想和安妮成为好朋友，一起做游戏，可是他总是没有勇气去跟安妮打招呼。奇奇既害羞有担心，他想了很多很多...... 奇奇能和安妮成为好朋友么？  自信，积极，敞开心扉，交朋友并不难。'
+    }
   }
   onLoad (query) {
     console.log('query', query)
-    const id = query && + query.id
+    const id = query && +query.book_id
     this.id = id || this.id || 0
   }
 }
 </script>
-
+<style lang="less">
+  page{
+    background: #F3F3F3;
+  }
+  .container{
+    margin-bottom: 104rpx;
+  }
+  .img-wrap{
+    width: 100vw;
+    height:492rpx;
+    background: #F3F3F3;
+    text-align: center;
+    .img{
+      width: 300rpx;
+      height: 414rpx;
+      margin-top: 246rpx;
+      transform: translateY(-50%);
+    }
+  }
+  .book-msg{
+    background: #fff;
+    margin-bottom: 8rpx;
+    width: 100vw;
+    padding: 30rpx 32rpx;
+    box-sizing: border-box;
+    &__name{
+      // margin-top: 30rpx;
+      height: 44rpx;
+      line-height: 44rpx;
+      font-size: 32rpx;
+      font-weight: 400;
+      color: #1d1d1d;
+    }
+    &__rent{
+      margin-top: 16rpx;
+      color: #4a4a4a;
+      font-size: 24rpx;
+      height: 34rpx;
+      line-height: 34rpx;
+      .book-rent{
+        height: 40rpx;
+        line-height: 40rpx;
+        color: #1d1d1d;
+        font-size: 28rpx;
+      }
+    }
+    &__author, &__publisher, &__score, &__sort{
+      height: 48rpx;
+      line-height: 48rpx;
+      color: #4a4a4a;
+      font-size: 24rpx;
+    }
+    &__author{
+      margin-top: 16rpx;
+    }
+    &__sort{
+      .sort-item{
+        display: inline-block;
+        border-radius: 21rpx;
+        border: 1rpx solid #979797;
+        padding: 0 16rpx;
+        height: 34rpx;
+        line-height: 36rpx;
+        margin-right: 16rpx;
+      }
+    }
+  }
+  .book-desc{
+    padding: 20rpx 32rpx;
+    background: #fff;
+    .desc__title{
+      font-size: 28rpx;
+      color: #1d1d1d;
+      font-weight: 500;
+      height: 48rpx;
+      line-height: 48rpx;
+    }
+    .desc__content{
+      font-size: 24rpx;
+      color: #1d1d1d;
+      font-weight: 400;
+    }
+  }
+  .bottom{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    height: 96rpx;
+    width: 100vw;
+    display: flex;
+    .store{
+      width: 140rpx;
+      height: 34rpx;
+      line-height: 34rpx;
+      margin-top: 30rpx;
+      text-align: center;
+      border-right: 1px solid #979797;
+      .img{
+        // margin-top:20rpx;
+        width: 50rpx;
+        height: 50rpx;
+        transform: translateY(-10rpx)
+      }
+    }
+    .go-shelf{
+      width: 160rpx;
+      text-align: center;
+      margin-top: 18rpx;
+      .img{
+        width: 50rpx;
+        height: 50rpx;
+      }
+    }
+    .add-shelf{
+      flex: 1;
+      align-self: center;
+      padding: 0 12rpx;
+      button{
+        height: 80rpx;
+        line-height: 80rpx;
+        color: #fff;
+        border-radius: 8rpx;
+        background: #17b393;
+        border: 0;
+      }
+    }
+  }
+</style>

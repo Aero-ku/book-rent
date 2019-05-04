@@ -1,8 +1,8 @@
 <template>
   <view class="book-list">
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd" wx:for="{{list}}" wx:for-item="item" wx:key="{{list.id}}">
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+      <view class="weui-panel__bd" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <navigator url="/pages/main/detail?book_id={{item.book_id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.book_image}}" />
           </view>
