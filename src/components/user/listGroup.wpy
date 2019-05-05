@@ -1,0 +1,50 @@
+<template>
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="http://mxhb.sztd123.com/images//shm.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;" />
+      </view>
+      <view class="weui-cell__bd">满熊收款码</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="http://mxhb.sztd123.com/images//bangzhu.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;" />
+      </view>
+      <view class="weui-cell__bd">帮助中心</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="http://mxhb.sztd123.com/images//kefu.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;" />
+      </view>
+      <view class="weui-cell__bd">联系客服</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="http://mxhb.sztd123.com/images/tabbars/icon-buy-active@2x.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;" />
+      </view>
+      <view class="weui-cell__bd">修改密码</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="http://mxhb.sztd123.com/images//out.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;" />
+      </view>
+      <view class="weui-cell__bd">退出登录</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class listGroup extends wepy.component {
+
+}
+</script>
+<style lang="less" scoped>
+  .weui-cells{
+    width: 100vw;
+  }
+</style>

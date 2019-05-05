@@ -1,13 +1,18 @@
 <template>
   <view class="container">
     <view class="user" @tap="goLogin">
-      <image class="user__avatar" src="{{ userInfo.avatarUrl ? userInfo.avatarUrl : '../images/icon/icon-avatar@2x.png'}}" background-size="cover"/>
+      <image class="user__avatar" src="{{ userInfo.avatarUrl ? userInfo.avatarUrl : 'http://mxhb.sztd123.com/images/user/avatar_default.png'}}" background-size="cover"/>
       <view class="user-info">
         <view class="user-info__name">{{userInfo.nickName}}</view>
         <view class="user-info__msg">{{userInfo.msg}}</view>
       </view>
     </view>
-    <view class="weui-panel">
+    <userInfo></userInfo>
+    <myOrder></myOrder>
+    <manage></manage>
+    <babyManage></babyManage>
+    <listGroup></listGroup>
+    <!-- <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_small-appmsg">
           <view class="weui-cells weui-cells_in-small-appmsg">
@@ -70,7 +75,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 </template>
 <script>
@@ -78,16 +83,21 @@
   // import { service } from '../config.js'
   // import http from '../mixins/http'
   // import base from '../mixins/base'
-  
-  export default class User extends wepy.page{
+  import userInfo from '../components/user/userInfo'
+  import myOrder from '../components/user/myOrder'
+  import manage from '../components/user/manage'
+  import babyManage from '../components/user/babyManage'
+  import listGroup from '../components/user/listGroup'
+  export default class User extends wepy.page {
     config = {
-      navigationBarTitleText: '我的'
+      navigationBarTitleText: '我的',
+      navigationBarBackgroundColor: 'black'
     }
     data = {
       userInfo: {
         avatarUrl: '',
-        nickName: '未登录用户',
-        msg: '点击登录账号'
+        nickName: '未登录',
+        msg: '点击登录'
       },
       isLogined: false
     }
@@ -194,6 +204,13 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.isLogined = this.$parent.globalData.authorize
     }
+    components = {
+      userInfo,
+      manage,
+      myOrder,
+      babyManage,
+      listGroup
+    }
   }
 </script>
 <style lang="less">
@@ -214,13 +231,19 @@ page{
     }
     &-info{
       flex: 1;
-      margin: 20rpx 0;
+      padding: 25rpx 0 0;
       &__name{
-        color: #5cbaa7;
+        color: #1d1d1d;
+        font-size: 32rpx;
+        height: 44rpx;
+        line-height: 44rpx;
+        font-weight: 400;
       }
       &__msg{
-        font-size: 26rpx;
-        color: #999;
+        height: 40rpx;
+        line-height: 40rpx;
+        font-size: 28rpx;
+        color: #17b393;
       }
     }
   }

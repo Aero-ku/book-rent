@@ -1,0 +1,84 @@
+<template>
+  <view class="my-order">
+   <view class="list">
+      <view class="name">宝贝信息</view>
+      <view class="all">管理</view>
+   </view>
+   <view class="item-group">
+     <image src="http://mxhb.sztd123.com/images/user/avatar_default.png" class="baby-img"/>
+     <view class="add-baby">
+      <image src="../../images/add.png" class="img"/>
+     </view>
+   </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import base from '../../mixins/base'
+export default class babyManage extends wepy.component{
+  // mixins = [base]
+  methods = {
+  }
+  data = {
+   
+  }
+  computed = {
+  
+  }
+  onLoad(){
+  
+  }
+}
+</script>
+<style lang="less" scoped>
+.my-order{
+  background: #fff;
+  margin: 20rpx 0;
+  width: 100vw;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  .list{
+    display: flex;
+    justify-content: space-between;
+    .name{
+      color: #1d1d1d;
+      height: 40rpx;
+      line-height: 40rpx;
+      font-weight: 600;
+      font-size: 28rpx;
+    }
+    .all{
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #4a4a4a;
+      height: 34rpx;
+      line-height: 34rpx;
+    }
+  }
+  .item-group{
+    display: flex;
+    padding: 20rpx;
+    .baby-img{
+      height: 100rpx;
+      width: 100rpx;
+      border-radius: 50%;
+      margin-right: 30rpx;
+    }
+    .add-baby{
+      box-sizing: border-box;
+      padding: 25rpx;
+      height: 100rpx;
+      width: 100rpx;
+      border-radius: 50%;
+      margin-right: 24rpx;
+      border: 1px  dashed #979797;
+      .img{
+        height: 50rpx;
+        width: 50rpx;
+      }
+    }
+  }
+}
+</style>
+
+

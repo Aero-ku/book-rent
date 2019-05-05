@@ -1,0 +1,71 @@
+<template>
+  <view class="manage">
+   <view class="manage-part">
+     <view class="manage-item">
+       <image class="manage-img" src="http://mxhb.sztd123.com/images//user/icon_operate_01.png"/>
+       <view class="text">拼团订单</view>
+     </view>
+     <view class="manage-item">
+       <image class="manage-img" src="http://mxhb.sztd123.com/images//user/icon_operate_02.png"/>
+       <view class="text">回收订单</view>
+     </view>
+     <view class="manage-item">
+       <image class="manage-img" src="http://mxhb.sztd123.com/images//user/icon_operate_03.png"/>
+       <view class="text">邀请管理</view>
+     </view>
+     <view class="manage-item">
+       <image class="manage-img" src="http://mxhb.sztd123.com/images//user/icon_operate_04.png"/>
+       <view class="text">地址管理</view>
+     </view>
+   </view>
+   <image class="poster" src="http://mxhb.sztd123.com/images//newsj.png" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import base from '../../mixins/base'
+export default class manage extends wepy.component {
+  // mixins = [base]
+  methods = {
+  }
+  data = {
+  }
+  computed = {
+  }
+  onLoad() {
+  }
+}
+</script>
+<style lang="less" scoped>
+  .manage{
+    margin-top: 20rpx;
+    background: #fff;
+    &-part{
+      display: flex;
+      padding: 16rpx;
+      .manage-item{
+        flex: 1;
+        .manage-img{
+          margin: 20rpx auto 10rpx;
+          height: 60rpx;
+          width: 50rpx;
+          display: block;
+        }
+        .text{
+          text-align: center;
+          color: #6d6b6b;
+          font-size: 24rpx;
+          height: 34rpx;
+          line-height: 34rpx;
+          font-weight: 400;
+        }
+      }
+    }
+    .poster{
+      width: 708rpx;
+      padding: 16rpx 21rpx 0;
+      height: 154rpx;
+      
+    }
+  }
+</style>
