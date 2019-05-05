@@ -54,22 +54,23 @@ export default class details extends wepy.page {
     storeBook() {
       const self = this
       self.stored = !self.stored
+      console.log(self.stored)
       if (this.$parent.globalData.authorize) {
         const { nickName } = this.userInfo
         wx.request({
-          url: 'http://localhost:12306/storeBook',
+          url: self.stored ? 'http://localhost:12306/storeBook' : 'http://localhost:12306/unStoreBook',
           data: {
             user_name: nickName,
             book_id: self.book_id
           },
-          method: 'get',
+          method: 'post',
           success(res) {
             console.log('收藏请求响应内容：', res)
             if (res.statusCode === 200) {
               console.log('self.stored', self.stored)
               wx.showToast({
-                title: '添加收藏！',
-                icon: 'success',
+                title: self.stored ? '添加收藏！' : '取消收藏',
+                icon: self.stored ? 'success' : 'none',
                 duration: 1000
               })
             }
