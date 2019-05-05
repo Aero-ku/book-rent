@@ -38,30 +38,31 @@ export default class details extends wepy.page {
     navigationBarTitleText: '图书详情'
   }
   data = {
-    book_id: '',
+    bookId: '',
     userInfo: {},
     book: {},
     stored: false
   }
   onLoad (query) {
     console.log('query', query)
-    const id = query && +query.book_id
-    this.book_id = id || this.book_id || 0
+    const bookId = query && +query.book_id
+    this.bookId = bookId || this.book_id || 0
     this.userInfo = this.$parent.globalData.userInfo
+    this.userId = this.$parent.globalData.open_id
     this.initPageData()
   }
   methods = {
     storeBook() {
       const self = this
-      self.stored = !self.stored
       console.log(self.stored)
       if (this.$parent.globalData.authorize) {
+        self.stored = !self.stored
         const { nickName } = this.userInfo
         wx.request({
           url: self.stored ? 'http://localhost:12306/storeBook' : 'http://localhost:12306/unStoreBook',
           data: {
             user_name: nickName,
-            book_id: self.book_id
+            book_id: self.bookId
           },
           method: 'post',
           success(res) {
@@ -76,20 +77,6 @@ export default class details extends wepy.page {
             }
           }
         })
-        // this.stored = !this.stored
-        // if (this.stored) {
-        //   wx.showToast({
-        //     title: '添加收藏！',
-        //     icon: 'success',
-        //     duration: 1000
-        //   })
-        // } else {
-        //   wx.showToast({
-        //     title: '取消收藏！',
-        //     icon: 'none',
-        //     duration: 1000
-        //   })
-        // }
       } else {
         wx.showModal({
           title: '请先登录',
@@ -107,17 +94,37 @@ export default class details extends wepy.page {
     }
   }
   initPageData() {
+    // 获取图书详情
     const self = this
     wx.request({
       url: 'http://localhost:12306/getBookDetail',
       data: {
-        book_id: this.book_id
+        book_id: this.bookId
       },
       method: 'get',
       success(res) {
         self.book = res.data[0]
       }
     })
+    // 获取用户收藏信息
+    if (this.$parent.globalData.authorize) {
+      wx.request({
+        url: 'http://localhost:12306/getStoreInfo',
+        data: {
+          user_name: self.userInfo.nickName
+        },
+        method: 'get',
+        success(res) {
+          const { user_store } = res.data[0]
+          console.log('res.data', res.data, 'user_store', user_store)
+          user_store.forEach(function (item, index, arr) {
+            if (item === self.book.book_id) {
+              self.stored = true
+            }
+          })
+        }
+      })
+    }
   }
 }
 </script>
