@@ -8,10 +8,15 @@
       </view>
     </view>
     <userInfo></userInfo>
-    <myOrder></myOrder>
-    <manage></manage>
-    <babyManage></babyManage>
-    <listGroup></listGroup>
+    <view class="main" wx:if="{{isLogined}}">
+      <myOrder></myOrder>
+      <manage></manage>
+      <babyManage></babyManage>
+      <listGroup></listGroup>
+    </view>
+    <view class="noLogin" wx:else>
+      登录满熊账号即有可能获得xx元优惠券，赶紧登录吧！
+    </view>
     <!-- <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_small-appmsg">
@@ -268,4 +273,17 @@ page{
     vertical-align:text-bottom;
   }
 }
+.noLogin{
+    margin-top: 20rpx;
+    padding-top: 92rpx;
+    color: #4A4A4A;
+    font-size: 24rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    text-align: center;
+    background: #fff;
+    height: 732rpx;
+    font-weight: 400;
+    width: 100vw;
+  }
 </style>
