@@ -1,0 +1,63 @@
+<template>
+  <view class="page">
+    <view class="item">
+      <List1 name="年龄" :showAll.sync="showAll"></List1>
+      <Sort1 :list.sync="age"></Sort1>
+    </view>
+    <view class="item">
+      <List2 name="推荐" :showAll.sync="showAll"></List2>
+      <Sort2 :list.sync="recommend"></Sort2>
+    </view>
+    <view class="item">
+      <List3 name="绘本分类" :showAll.sync="showAll"></List3>
+      <Sort3 :list.sync="classification"></Sort3>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import recommendSort from '../../components/index/recommendSort'
+import pandaList from '../../components/index/pandaList'
+export default class BookClassify extends wepy.page {
+  config = {
+    navigationBarTitleText: '图书分类'
+  }
+  data = {
+    age: [
+      '0-2岁',
+      '2-4岁',
+      '4-6岁',
+      '6-10岁'
+    ],
+    recommend: [
+      '性教育', '二胎教育', '自我保护', '豆瓣8.5'
+    ],
+    classification: [
+      '获奖名著',
+      '名家大师',
+      '学习能力',
+      '入学入园',
+      '品格塑造',
+      '自我管理',
+      '热门动画',
+      '科普百科'
+    ],
+    showAll: false
+  }
+  components = {
+    Sort1: recommendSort,
+    Sort2: recommendSort,
+    Sort3: recommendSort,
+    List1: pandaList,
+    List2: pandaList,
+    List3: pandaList
+  }
+}
+</script>
+<style>
+page{
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+</style>
+

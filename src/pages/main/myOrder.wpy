@@ -203,7 +203,9 @@ export default class myOrder extends wepy.page {
     ]
   }
 
-  onLoad() {
+  onLoad(options) {
+    console.log('options', options)
+    this.activeIndex = options.index
     var that = this
     wx.getSystemInfo({
       success: function(res) {

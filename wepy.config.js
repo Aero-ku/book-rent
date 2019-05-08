@@ -1,5 +1,5 @@
-const path = require('path');
-var prod = process.env.NODE_ENV === 'production';
+const path = require('path')
+var prod = process.env.NODE_ENV === 'production'
 
 module.exports = {
   wpyExt: '.wpy',
@@ -19,9 +19,9 @@ module.exports = {
     less: {
       compress: prod
     },
-    sass: {
-      outputStyle: 'compressed'
-    },
+    // sass: {
+    //   outputStyle: 'compressed'
+    // },
     babel: {
       sourceMap: true,
       presets: [

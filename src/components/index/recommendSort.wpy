@@ -1,13 +1,8 @@
 <template>
   <view class="recommend-list">
-    <view class="recommend-item">情感认知</view>
-    <view class="recommend-item">习惯养成</view>
-    <view class="recommend-item">自我保护</view>
-    <view class="recommend-item">品格塑造</view>
-    <view class="recommend-item">幽默趣味</view>
-    <view class="recommend-item">情绪管理</view>
-    <view class="recommend-item">科普百科</view>
-    <view class="recommend-item">双语绘本</view>
+    <view wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+      <view class="recommend-item">{{item}}</view>
+    </view>
   </view>
 </template>
 <script>
@@ -26,6 +21,8 @@ export default class recommentSort extends wepy.component {
 </script>
 <style lang="less" scoped>
   .recommend-list{
+    width: 100vw;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     view{
@@ -50,3 +47,5 @@ export default class recommentSort extends wepy.component {
     }
   }
 </style>
+
+

@@ -2,25 +2,25 @@
   <view class="my-order">
    <view class="list">
       <view class="name" >我的订单</view>
-      <view class="all" @tap="goOrder">查看全部</view>
+      <view class="all" data-index="0" @tap="goOrder">查看全部</view>
    </view>
    <view class="item-group">
-      <view class="item">
+      <view class="item" data-index="1" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_01.png"/>
         <view class="item-text">待付款</view>
         <view class="showCount">1</view>
       </view>
-      <view class="item">
+      <view class="item" data-index="2" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_02.png"/>
         <view class="item-text">待发货</view>
         <view class="showCount">1</view>
       </view>
-      <view class="item">
+      <view class="item" data-index="3" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_03.png"/>
         <view class="item-text">待归还</view>
         <view class="showCount">1</view>
       </view>
-      <view class="item">
+      <view class="item" data-index="4" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_04.png"/>
         <view class="item-text">待评价</view>
         <view class="showCount">1</view>
@@ -34,9 +34,12 @@ import wepy from 'wepy'
 export default class myOrder extends wepy.component {
   // mixins = [base]
   methods = {
-    goOrder() {
+    goOrder(e) {
+      console.log(e)
+      const index = e.currentTarget.dataset.index
+      debugger
       wx.navigateTo({
-        url: '/pages/main/myOrder'
+        url: `/pages/main/myOrder?index=${index}`
       })
     }
   }
