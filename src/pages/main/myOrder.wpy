@@ -1,4 +1,4 @@
-<template>
+a<template>
   <view class="page">
     <view class="page__bd">
         <view class="weui-tab">
@@ -12,135 +12,165 @@
             </view>
             <view class="weui-tab__panel">
               <!-- 全部 -->
-              <view class="order" hidden="{{activeIndex != 0}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view hidden="{{activeIndex != 0}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
-                </view>
-              </view>
-              <view class="order" hidden="{{activeIndex != 0}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
               <!-- 待付款 -->
-              <view class="order" hidden="{{activeIndex != 1}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view hidden="{{activeIndex != 1}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
               <!-- 待发货 -->
-              <view class="order" hidden="{{activeIndex != 2}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view class="" hidden="{{activeIndex != 2}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
               <!-- 待签收-->
-              <view class="order" hidden="{{activeIndex != 3}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view hidden="{{activeIndex != 3}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
               <!-- 待归还 -->
-              <view class="order" hidden="{{activeIndex != 4}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view hidden="{{activeIndex != 4}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
               <!-- 已完成 -->
-              <view class="order" hidden="{{activeIndex != 5}}">
-                <view class="order__time">2018-12-24 18:30</view>
-                <view class="order__detail">
-                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                  <view class="order__detail--desc">
-                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                    <view class="desc__other">
-                      <text class="txt">支付宝</text>
-                      <text class="txt">套餐计划：15天</text>
+              <view hidden="{{activeIndex != 5}}">
+                <view class="order">
+                  <view class="order__time">2018-12-24 18:30</view>
+                  <view class="order__detail">
+                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                    <view class="order__detail--desc">
+                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                      <view class="desc__other">
+                        <text class="txt">支付宝</text>
+                        <text class="txt">套餐计划：15天</text>
+                      </view>
+                      <view class="desc__money">￥76.00</view>
                     </view>
-                    <view class="desc__money">￥76.00</view>
+                  </view>
+                  <view class="order__menu">
+                    <view class="menu-item">查看物流</view>
+                    <view class="menu-item">签收</view>
                   </view>
                 </view>
-                <view class="order__menu">
-                  <view class="menu-item">查看物流</view>
-                  <view class="menu-item">签收</view>
+                <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
                 </view>
               </view>
             </view>
@@ -193,14 +223,18 @@ export default class myOrder extends wepy.page {
   }
 }
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 button, view{
   font-weight: 400;
 }
 page,
 .page,
 .page__bd{
-    height: 100%;
+
+}
+page{
+  width: 100vw;
+  height: 100vh;
 }
 .page__bd{
     padding-bottom: 0;
@@ -295,5 +329,11 @@ page,
       margin-left: 16rpx;
     }
   }
+}
+.weui-loadmore_line{
+  border-top: 2rpx solid #ccc;
+}
+.weui-loadmore__tips_in-line {
+  background: #fff;
 }
 </style>
