@@ -1,25 +1,29 @@
 <template>
   <view class="my-order">
    <view class="list">
-      <view class="name">我的订单</view>
-      <view class="all">查看全部</view>
+      <view class="name" >我的订单</view>
+      <view class="all" @tap="goOrder">查看全部</view>
    </view>
    <view class="item-group">
       <view class="item">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_01.png"/>
         <view class="item-text">待付款</view>
+        <view class="showCount">1</view>
       </view>
       <view class="item">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_02.png"/>
         <view class="item-text">待发货</view>
+        <view class="showCount">1</view>
       </view>
       <view class="item">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_03.png"/>
         <view class="item-text">待归还</view>
+        <view class="showCount">1</view>
       </view>
       <view class="item">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_04.png"/>
         <view class="item-text">待评价</view>
+        <view class="showCount">1</view>
       </view>
    </view>
   </view>
@@ -30,6 +34,11 @@ import wepy from 'wepy'
 export default class myOrder extends wepy.component {
   // mixins = [base]
   methods = {
+    goOrder() {
+      wx.navigateTo({
+        url: '/pages/main/myOrder'
+      })
+    }
   }
   data = {
   }
@@ -68,6 +77,7 @@ export default class myOrder extends wepy.component {
     
     display: flex;
     .item{
+      position: relative;
       flex: 1;
       .item-img{
         margin: 25rpx auto 10rpx;
@@ -84,6 +94,21 @@ export default class myOrder extends wepy.component {
         font-weight: 400;
       }
     }
+    .showCount{
+        position: absolute;
+        height: 28rpx;
+        width: 28rpx;
+        border: 2rpx solid #F24724;
+        border-radius: 50%;
+        color: #f24724;
+        font-size: 24rpx;
+        text-align: center;
+        line-height: 28rpx;
+        background: #fff;
+        top: 6rpx;
+        right: 38rpx;
+        font-weight: 500;
+      }
   }
 }
 </style>

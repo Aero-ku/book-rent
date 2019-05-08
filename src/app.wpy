@@ -22,7 +22,8 @@ export default class app extends wepy.app {
       'pages/borrow', // 借书架
       'pages/user', // 个人中心
       'pages/login/index',
-      'pages/main/detail' // 图书详情
+      'pages/main/detail', // 图书详情
+      'pages/main/myOrder' // 我的订单
     ],
     window: {
       navigationBarTitleText: '满熊阅读',

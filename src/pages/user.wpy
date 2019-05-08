@@ -199,17 +199,26 @@
         }
       }
     }
+
     onShow () {
       console.log(this.$parent.globalData)
       this.userInfo = this.$parent.globalData.userInfo
       this.isLogined = this.$parent.globalData.authorize
     }
+
     components = {
       userInfo,
       manage,
       myOrder,
       babyManage,
       listGroup
+    }
+
+    events = {
+      update(userInfo) {
+        console.log('从组件传递过来的信息', userInfo)
+        this.userInfo = userInfo
+      }
     }
   }
 </script>

@@ -15,18 +15,15 @@
 <script>
 import wepy from 'wepy'
 // import base from '../../mixins/base'
-export default class babyManage extends wepy.component{
+export default class babyManage extends wepy.component {
   // mixins = [base]
   methods = {
   }
   data = {
-   
   }
   computed = {
-  
   }
-  onLoad(){
-  
+  onLoad() {
   }
 }
 </script>
@@ -80,5 +77,3 @@ export default class babyManage extends wepy.component{
   }
 }
 </style>
-
-

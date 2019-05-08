@@ -6,8 +6,8 @@
     <view class="special-topic module-item">
       <pandaList1 name="满熊书单" url=""></pandaList1>
       <view class="special-zone">
-        <SpecialTopic class="special-zone__item"></SpecialTopic>
-        <SpecialTopic class="special-zone__item"></SpecialTopic>
+        <SpecialTopic1 class="special-zone__item" name="0-2岁专题" url="http://mxhb.sztd123.com/images/newlist.png"></SpecialTopic1>
+        <SpecialTopic2 class="special-zone__item" name="2-4岁专题" url="../images/new/newbg.png"></SpecialTopic2>
       </view>
     </view>
     <view class="module-item">
@@ -42,7 +42,8 @@ export default class firstPage extends wepy.page {
     PandaList1: PandaList,
     PandaList2: PandaList,
     PandaList3: PandaList,
-    SpecialTopic,
+    SpecialTopic1: SpecialTopic,
+    SpecialTopic2: SpecialTopic,
     RecommendSort,
     PandaRecommend
   }

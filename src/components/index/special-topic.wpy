@@ -1,8 +1,8 @@
 <template>
   <view class="module">
     <view class="img-zone">
-      <image class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556725578079&di=50067e869f2a2d221b36724ddc946636&imgtype=0&src=http%3A%2F%2Fimg.redocn.com%2Fsheji%2F20160527%2Ffengchekatongliuyiertongjiebeijingshipin_6395773.jpg"/>
-      <view class="text">0-2岁亲情专题</view>
+      <image class="img" src="{{url}}"/>
+      <view class="text">{{name}}</view>
     </view>
     <view class="list" wx:for="{{bookList}}" wx:for-item="item" wx:key="{{index}}" >
       <text>{{index + 1}}.</text>
@@ -13,7 +13,7 @@
 </template>
 <script>
 import wepy from 'wepy'
-export default class pandaList extends wepy.component{
+export default class pandaList extends wepy.component {
   props = {
     name: {
       type: String,
@@ -43,7 +43,6 @@ export default class pandaList extends wepy.component{
   }
 
   methods = {
-   
   }
 }
 </script>
@@ -96,5 +95,3 @@ text{
   }
 }
 </style>
-
-

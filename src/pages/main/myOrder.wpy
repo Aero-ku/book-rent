@@ -1,0 +1,299 @@
+<template>
+  <view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+              <!-- 全部 -->
+              <view class="order" hidden="{{activeIndex != 0}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <view class="order" hidden="{{activeIndex != 0}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <!-- 待付款 -->
+              <view class="order" hidden="{{activeIndex != 1}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <!-- 待发货 -->
+              <view class="order" hidden="{{activeIndex != 2}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <!-- 待签收-->
+              <view class="order" hidden="{{activeIndex != 3}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <!-- 待归还 -->
+              <view class="order" hidden="{{activeIndex != 4}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+              <!-- 已完成 -->
+              <view class="order" hidden="{{activeIndex != 5}}">
+                <view class="order__time">2018-12-24 18:30</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
+                    <view class="desc__other">
+                      <text class="txt">支付宝</text>
+                      <text class="txt">套餐计划：15天</text>
+                    </view>
+                    <view class="desc__money">￥76.00</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item">查看物流</view>
+                  <view class="menu-item">签收</view>
+                </view>
+              </view>
+            </view>
+        </view>
+    </view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class myOrder extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的订单'
+  }
+
+  data = {
+    tabs: ['全部', '待付款', '待发货', '待签收', '待归还', '已完成'],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0,
+    sliderWidth: 62,
+    orderList: [
+      {
+        order_time: '2018-12-05',
+        order_name: '宝宝好习惯养成--妈妈爸爸，我表现的棒么？等8本',
+        order_source: '微信',
+        order_price: 76.00,
+        order_range: '15天',
+        order_status: 1
+      }
+    ]
+  }
+
+  onLoad() {
+    var that = this
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log('res.windowWidth', res.windowWidth)
+        that.sliderLeft = (res.windowWidth / that.data.tabs.length - that.sliderWidth) / 2
+        that.sliderOffset = res.windowWidth / that.data.tabs.length * that.data.activeIndex
+      }
+    })
+  }
+
+  methods = {
+    tabClick: function (e) {
+      console.log('e', e)
+      this.sliderOffset = e.currentTarget.offsetLeft
+      this.activeIndex = e.currentTarget.id
+    }
+  }
+}
+</script>
+<style lang='less' scoped>
+button, view{
+  font-weight: 400;
+}
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-navbar{
+  background: #fff;
+  border-bottom: 0;
+}
+// title
+.weui-navbar__slider{
+  width: 125rpx;
+}
+.weui-navbar__item.weui-bar__item_on {
+  color: #17B393;
+}
+.weui-navbar__slider{
+  background: #17b393;
+}
+
+// content
+.order{
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 16rpx 30rpx;
+  .order__time{
+    height: 28rpx;
+    line-height: 28rpx;
+    font-size: 20rpx;
+    font-weight: 400;
+    padding-bottom: 12rpx;
+  }
+  .order__detail{
+    display: flex;
+    &--img{
+      background: orangered;
+      width: 160rpx;
+      height: 160rpx;
+      margin-right: 20rpx;
+    }
+    &--desc{
+      flex: 1;
+      position: relative;
+      .desc{
+        &__name{
+          line-height: 36rpx;
+          font-size: 24rpx;
+          color: #1d1d1d;
+        }
+        &__other{
+          position: absolute;
+          
+          display: inline-block;
+          bottom: 0;
+          .txt{
+            height: 34rpx;
+            line-height: 34rpx;
+            font-size: 24rpx;
+            color: #9b9b9b;
+            margin-right: 20rpx;
+          }
+        }
+        &__money{
+          position: absolute;
+          color: #1d1d1d;
+          height: 34rpx;
+          line-height: 34rpx;
+          font-weight: 400;
+          font-size: 24rpx;
+          bottom: 0;
+          right: 12rpx;
+        }
+      }
+    }
+  }
+  .order__menu{
+    display: flex;
+    padding-top: 16rpx;
+    flex-direction: row-reverse;
+    height: 60rpx;
+    align-items: center;
+    margin-top: 20rpx;
+    border-top: 1px solid #e2e2e2;
+    .menu-item{
+      height: 48rpx;
+      line-height: 48rpx;
+      border: 1px solid #17b393;
+      color: #17b393;
+      font-size: 28rpx;
+      text-align: center;
+      border-radius: 40rpx;
+      padding: 0 20rpx;
+      margin-left: 16rpx;
+    }
+  }
+}
+</style>
