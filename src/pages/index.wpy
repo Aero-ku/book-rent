@@ -82,50 +82,10 @@ export default class firstPage extends wepy.page {
     ],
     categorys: [
       { title: '借书', image: '../images/new/icon_5@2x.png' },
-      { title: '绘本回收', image: '../images/category/icon-cate-group@2x.png' },
-      { title: '系列图书', image: '../images/category/icon-cate-tag@2x.png' },
-      { title: '竹币商城', image: '../images/category/icon-cate-new@2x.png' }
-    ],
-    // bookList: [
-    //   {id: '1', image: 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg', name: '《奇奇好棒—我喜欢安妮》', hasExist: false},
-    //   {id: '466', image: 'https://imagenew.qujie8.com/panda/ed/18/1856424beb86c78d8d13c4ec30e143ed.jpg', name: '《子儿，吐吐》', hasExist: false},
-    //   {id: '94', image: 'https://imagenew.qujie8.com//uploads/20170622142422-594b62969927e.png', name: '《儿童情绪管理—我不怕疼》', hasExist: false},
-    //   {id: '16', image: 'https://imagenew.qujie8.com/panda/32/ee/ee3c40bd16b085aced8acbd01565fb32.jpg', name: '《香喷喷食育绘本—让我更强壮的食物》', hasExist: false},
-    //   {id: '532', image: 'https://imagenew.qujie8.com/panda/ad/68/687a3c8b4ee444990e0c8b9cdc2e6ead.jpg', name: '《小熊宝宝绘本—洗澡》', hasExist: false},
-    //   {id: '232', image: 'https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png', name: '《心灵养育绘本Ⅱ送玩具回家》', hasExist: false}
-    // ],
-    catedata: {
-      cate_1: [
-        {id: '1', image: 'https://imagenew.qujie8.com/panda/65/2a/2a26819cffdbc5daadbceeab46face65.jpg', name: '《奇奇好棒—我喜欢安妮》'},
-        {id: '466', image: 'https://imagenew.qujie8.com/panda/ed/18/1856424beb86c78d8d13c4ec30e143ed.jpg', name: '《子儿，吐吐》'},
-        {id: '94', image: 'https://imagenew.qujie8.com//uploads/20170622142422-594b62969927e.png', name: '《儿童情绪管理—我不怕疼》'}
-      ],
-      cate_2: [
-        {id: '16', image: 'https://imagenew.qujie8.com/panda/32/ee/ee3c40bd16b085aced8acbd01565fb32.jpg', name: '《香喷喷食育绘本—让我更强壮的食物》'},
-        {id: '532', image: 'https://imagenew.qujie8.com/panda/ad/68/687a3c8b4ee444990e0c8b9cdc2e6ead.jpg', name: '《小熊宝宝绘本—洗澡》'},
-        {id: '232', image: 'https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png', name: '《心灵养育绘本Ⅱ送玩具回家》'}
-      ],
-      cate_3: [
-        {id: '347', image: 'https://imagenew.qujie8.com/panda/f4/2e/2ed634ebe91a6b48141d17f7c6e611f4.jpg', name: '《宫西达也—正义之士》'},
-        {id: '382', image: 'https://imagenew.qujie8.com//uploads/20170627155011-59520e3364fea.jpg', name: '《欧洲珍藏绘本—鼻子上的结》'},
-        {id: '265', image: 'https://imagenew.qujie8.com/panda/1c/ee/ee3da2daf7298fbc0bfd1bbb9e57821c.png', name: '《心灵养育绘本Ⅰ这是我的！》'}
-      ],
-      cate_4: [
-        {id: '51', image: 'https://imagenew.qujie8.com/panda/fe/38/388718a3cee3a2299c70cb1a9e1ce4fe.jpg', name: '《好疼呀！好疼呀！》'},
-        {id: '223', image: 'https://imagenew.qujie8.com//uploads/20170626005556-594feb1cd6cbf.jpg', name: '《自我保护—别想欺负我》'},
-        {id: '115', image: 'https://imagenew.qujie8.com/panda/49/63/63417e83d7e52cd91ce70f38ae5cf249.jpg', name: '《公鸡的新邻居》'}
-      ],
-      cate_5: [
-        {id: '141', image: 'https://imagenew.qujie8.com/panda/97/47/471747d0a89fff1ccd01f403adfb0997.jpg', name: '《了不起的幼儿园—比比谁的胆子大》'},
-        {id: '504', image: 'https://imagenew.qujie8.com/panda/d5/47/47ab4fde74da861db0b6c3869a87c6d5.jpg', name: '《冰雪奇缘—我们的新朋友》'},
-        {id: '328', image: 'https://imagenew.qujie8.com/panda/08/70/708d02e32f63eefb4b43e1ca79df7608.jpg', name: '《超级飞侠—南非的玩具小偷（双语）》'}
-      ],
-      cate_6: [
-        {id: '276', image: 'https://imagenew.qujie8.com//uploads/20170626162107-5950c3f3481ca.jpg', name: '《精灵鼠—在月亮上跳高》'},
-        {id: '62', image: 'https://imagenew.qujie8.com//uploads/20170621154446-594a23ee18312.jpeg', name: '《“小时候”中国图画书—小金鱼儿》'},
-        {id: '339', image: 'https://imagenew.qujie8.com/panda/6f/d8/d82a3badd7cfbd15bac35664eb55186f.png', name: '《科学爆炸啦—画家叔叔笔下的春夏秋冬》'}
-      ]
-    }
+      { title: '绘本回收', image: '../images/new/icon_6@2x.png' },
+      { title: '新书上架', image: '../images/new/icon_8@2x.png' },
+      { title: '竹币商城', image: '../images/new/icon_7@2x.png' }
+    ]
   }
   onLoad () {
     console.log('globalData', this.$parent.globalData)

@@ -47,8 +47,8 @@ export default class loginPage extends wepy.page {
               success(res) {
                 console.log(res.statusCode === 200, 'res', res)
                 if (res.statusCode === 200) {
-                  wx.switchTab({
-                    url: '/pages/index'
+                  wx.navigateBack({
+                    delta: 1
                   })
                 }
               }

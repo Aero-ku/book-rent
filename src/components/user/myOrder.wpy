@@ -37,7 +37,6 @@ export default class myOrder extends wepy.component {
     goOrder(e) {
       console.log(e)
       const index = e.currentTarget.dataset.index
-      debugger
       wx.navigateTo({
         url: `/pages/main/myOrder?index=${index}`
       })
