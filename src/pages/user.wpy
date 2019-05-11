@@ -44,6 +44,13 @@
       },
       isLogined: false
     }
+    // computed = {
+    //   userInfo: {
+    //     avatarUrl: '',
+    //     nickName: '未登录',
+    //     msg: '点击登录'
+    //   }
+    // }
     methods = {
       goLogin () {
         console.log(this.isLogined)
@@ -68,64 +75,13 @@
               self.$parent.globalData.authorize = false
               this.isLogined = false
               self.userInfo = {
-                nickName: '未登录用户',
-                avatarUrl: '../images/icon/icon-avatar@2x.png',
-                msg: '点击登录账号'
               }
               wx.showLoading({
                 title: '退出登录中',
                 duration: 1000,
                 success: function() {
-                  // wx.switchTab({
-                  //   url: '/pages/index'
-                  // })
                 }
               })
-              // this.$post({url: service.signOut}, {
-              //   success: ({code, data, message, statusCode}) => {
-              //     if (code === 0 && statusCode === 200) {
-              //       // 退出成功
-              //       // 清除 globalData.user 用户登录信息全局值
-              //       // 清除 setStorageSync 中保存的userInfo缓存
-              //       this.$parent.globalData.userInfo = null
-              //       this.$parent.globalData.mobileBindState = false
-              //       wx.setStorageSync('userInfo', null)
-
-              //       // 清除重置个人中心页面的显示数据
-              //       this.userInfo = {
-              //         nickName: '未登录用户',
-              //         avatarUrl: '../images/icon/icon-avatar@2x.png',
-              //         borrow_status_name: '借阅状态',
-              //         user_type_name: '',
-              //         remain_times: 0,
-              //         collect_count: 0
-              //       }
-              //       // 清除tabBarBrage标志
-              //       wx.removeTabBarBadge({
-              //         index: 1
-              //       })
-              //       wx.switchTab({
-              //         url: '/pages/index'
-              //       })
-              //     } else {
-              //       wx.showToast({
-              //         title: '退出失败，请稍后重试',
-              //         icon: 'none',
-              //         duration: 1000
-              //       })
-              //     }
-              //   },
-              //   fail: () => {
-              //     wx.showToast({
-              //       title: '退出失败，请稍后重试',
-              //       icon: 'none',
-              //       duration: 1000
-              //     })
-              //   },
-              //   complete: () => {
-              //     wx.hideLoading()
-              //   }
-              // })
             }
           }
         })
@@ -163,6 +119,7 @@
       update(userInfo) {
         console.log('从组件传递过来的信息', userInfo)
         this.userInfo = userInfo
+        this.isLogined = false
       }
     }
   }

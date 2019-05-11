@@ -47,5 +47,3 @@ export default class recommentSort extends wepy.component {
     }
   }
 </style>
-
-

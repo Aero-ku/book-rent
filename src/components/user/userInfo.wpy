@@ -21,7 +21,7 @@
 <script>
 import wepy from 'wepy'
 // import base from '../../mixins/base'
-export default class userInfo extends wepy.component{
+export default class userInfo extends wepy.component {
 //   mixins = [base]
   config = {
     navigationBarTitleText: '我的'
@@ -29,13 +29,10 @@ export default class userInfo extends wepy.component{
   methods = {
   }
   data = {
-   
   }
   computed = {
-  
   }
-  onLoad(){
-  
+  onLoad() {
   }
 }
 </script>
@@ -72,5 +69,3 @@ view, button, text{
     }
   }
 </style>
-
-

@@ -6,7 +6,7 @@
 </template>
 <script>
 import wepy from 'wepy'
-export default class pandaList extends wepy.component{
+export default class pandaList extends wepy.component {
   props = {
     name: {
       type: String,
@@ -26,8 +26,7 @@ export default class pandaList extends wepy.component{
 
   }
   methods = {
-    goTo () {
-
+    goTo() {
       wx.navigateTo({
         url: this.url
       })
@@ -64,5 +63,3 @@ page{
     }
   }
 </style>
-
-
