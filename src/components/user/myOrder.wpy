@@ -17,7 +17,7 @@
       </view>
       <view class="item" data-index="3" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_03.png"/>
-        <view class="item-text">待归还</view>
+        <view class="item-text">待收货</view>
         <view class="showCount">1</view>
       </view>
       <view class="item" data-index="4" @tap="goOrder">

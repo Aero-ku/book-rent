@@ -68,7 +68,7 @@ export default class details extends wepy.page {
           success(res) {
             console.log('收藏请求响应内容：', res)
             if (res.statusCode === 200) {
-              console.log('self.stored', self.stored)
+              console.log(self.$parent.globalData)
               wx.showToast({
                 title: self.stored ? '添加收藏！' : '取消收藏',
                 icon: self.stored ? 'success' : 'none',

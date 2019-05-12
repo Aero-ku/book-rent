@@ -57,19 +57,23 @@ export default class listGroup extends wepy.component {
             // 调用退出登录接口
             wx.showLoading({
               title: '退出登录中',
-              duration: 1000,
+              duration: 400,
               success: function() {
-                }
+              }
             })
             console.log('globalData', self.$parent.$parent.globalData)
-            self.$parent.$parent.globalData.userInfo = null
-            self.$parent.$parent.globalData.authorize = false
-            self.userInfo = {
+            self.$parent.$parent.globalData.userInfo = {
               nickName: '未登录',
               avatarUrl: 'http://mxhb.sztd123.com/images/user/avatar_default.png',
-              msg: '未登录'
+              msg: '点击登录'
             }
-            self.$emit('update', self.userInfo)
+            self.$parent.$parent.globalData.authorize = false
+            // self.userInfo = {
+            //   nickName: '未登录',
+            //   avatarUrl: 'http://mxhb.sztd123.com/images/user/avatar_default.png',
+            //   msg: '未登录'
+            // }
+            self.$emit('update', false) // false: 退出登录||未登录 true：已登录
           }
         }
       })

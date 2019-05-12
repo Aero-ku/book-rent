@@ -45,8 +45,9 @@ export default class loginPage extends wepy.page {
                 city
               },
               success(res) {
-                console.log(res.statusCode === 200, 'res', res)
                 if (res.statusCode === 200) {
+                  const data = res.data[0]
+                  self.$parent.globalData.userInfo = Object.assign(self.$parent.globalData.userInfo, data)
                   wx.navigateBack({
                     delta: 1
                   })

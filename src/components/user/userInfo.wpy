@@ -1,19 +1,19 @@
 <template>
   <view class="user-info">
     <view class="store">
-      <view class="number">0</view>
+      <view class="number">{{firstInfo.storeNum}}</view>
       <view class="text">收藏</view>
     </view>
     <view class="scor">
-      <view class="number">0</view>
+      <view class="number">{{firstInfo.score}}</view>
       <view class="text">积分</view>
     </view>
     <view class="coupon">
-      <view class="number">0</view>
+      <view class="number">{{firstInfo.couponNum}}</view>
       <view class="text">优惠券</view>
     </view>
     <view class="borrow-card">
-      <view class="number">0</view>
+      <view class="number">{{firstInfo.cardNum}}</view>
       <view class="text">借阅卡</view>
     </view>
   </view>
@@ -26,13 +26,22 @@ export default class userInfo extends wepy.component {
   config = {
     navigationBarTitleText: '我的'
   }
+  props = {
+    firstInfo: {
+      type: Object,
+      default: {
+        storeNum: 0,
+        score: 0,
+        couponNum: 0,
+        cardNum: 0
+      }
+    }
+  }
   methods = {
   }
   data = {
   }
   computed = {
-  }
-  onLoad() {
   }
 }
 </script>

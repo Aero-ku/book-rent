@@ -1,15 +1,15 @@
 <template>
   <view class="container">
     <view class="user" @tap="goLogin">
-      <image class="user__avatar" src="{{ userInfo.avatarUrl ? userInfo.avatarUrl : 'http://mxhb.sztd123.com/images/user/avatar_default.png'}}" background-size="cover"/>
+      <image class="user__avatar" src="{{ getUserInfo.avatarUrl ? getUserInfo.avatarUrl : 'http://mxhb.sztd123.com/images/user/avatar_default.png'}}" background-size="cover"/>
       <view class="user-info">
-        <view class="user-info__name">{{userInfo.nickName}}</view>
-        <view class="user-info__msg">{{userInfo.msg}}</view>
+        <view class="user-info__name">{{getUserInfo.nickName}}</view>
+        <view class="user-info__msg">{{getUserInfo.msg}}</view>
       </view>
     </view>
     <image class="my-assets" wx:if="{{isLogined}}" src="../images/new/button@3x.png"/>
     <view class="my-assets-text" wx:if="{{isLogined}}">我的资产</view>
-    <userInfo></userInfo>
+    <userInfo :firstInfo.sync="firstInfo"></userInfo>
     <view class="main" wx:if="{{isLogined}}">
       <myOrder></myOrder>
       <manage></manage>
@@ -42,18 +42,16 @@
         nickName: '未登录',
         msg: '点击登录'
       },
-      isLogined: false
+      isLogined: false,
+      firstInfo: {
+        storeNum: 0,
+        score: 0,
+        couponNum: 0,
+        cardNum: 0
+      }
     }
-    // computed = {
-    //   userInfo: {
-    //     avatarUrl: '',
-    //     nickName: '未登录',
-    //     msg: '点击登录'
-    //   }
-    // }
     methods = {
       goLogin () {
-        console.log(this.isLogined)
         if (!this.isLogined) {
           wx.navigateTo({
             url: '/pages/login/index'
@@ -101,10 +99,24 @@
     }
 
     onShow () {
-      console.log(this.$parent.globalData)
-      this.userInfo = this.$parent.globalData.userInfo
-      this.isLogined = this.$parent.globalData.authorize
-      // this.isLogined = true
+      const self = this
+      // self.userInfo = self.$parent.globalData.userInfo
+      self.isLogined = self.$parent.globalData.authorize
+      const userName = self.$parent.globalData.userInfo.user_name
+      if (self.$parent.globalData.authorize) {
+        wx.request({
+          url: 'http://localhost:12306/getFirstInfo',
+          data: {
+            user_name: userName
+          },
+          success(res) {
+            if (res.statusCode === 200) {
+              self.firstInfo = res.data
+              self.$apply()
+            }
+          }
+        })
+      }
     }
 
     components = {
@@ -116,10 +128,31 @@
     }
 
     events = {
-      update(userInfo) {
-        console.log('从组件传递过来的信息', userInfo)
-        this.userInfo = userInfo
-        this.isLogined = false
+      update(msg) {
+        if (msg === false) {
+          this.isLogined = false
+          this.firstInfo = {
+            storeNum: 0,
+            score: 0,
+            couponNum: 0,
+            cardNum: 0
+          }
+          this.$apply()
+        }
+      }
+    }
+
+    computed = {
+      getStore() {
+        if (this.$parent.globalData.userInfo.user_store) {
+          return this.$parent.globalData.userInfo.user_store.length
+        }
+      },
+      getUserInfo() {
+        return this.$parent.globalData.userInfo
+      },
+      getFirstInfo() {
+        return this.firstInfo
       }
     }
   }
