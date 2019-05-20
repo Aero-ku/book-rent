@@ -1,6 +1,6 @@
 <template>
   <swiper class="swiper" style="height:240rpx" autoplay="{{autoplay}}"
-    indicator-dots="{{indicatorDots}}" 
+    indicator-dots="{{indicatorDots}}"
     indicator-color="{{indicatorColor}}"
     indicator-active-color="{{indicatorActiveColor}}">
     <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
@@ -32,7 +32,7 @@ export default class borrow extends wepy.component {
   }
   props = {
     list: {
-      type: Object, 
+      type: Object,
       default: []
     },
     navigate: {

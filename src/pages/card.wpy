@@ -1,11 +1,201 @@
 <template>
-    <view></view>
+    <view class="wrapper">
+      <image src="../images/view.jpg" class="bottom-img"/>
+      <view class="container">
+        <view class="block user-info">
+          <image src="{{avatarUrl ? avatarUrl : 'http://mxhb.sztd123.com/images/user/avatar_default.png'}}" class="avatar"/>
+          <view class="name">{{nickName}}</view>
+          <view class="msg">{{msg}}</view>
+        </view>
+        <view class="block member member-month">
+          <view class="member__type">
+            <view class="text">月卡</view>
+          </view>
+          <view class="member__info">
+            <view class="price">￥18元 <text class="origin-price">原价20元</text></view>
+            <view class="tag">赠20竹币</view>
+            <view class="msg">送王者荣耀勇气级皮肤</view>
+          </view>
+          <view class="member__open">
+            <button class="open-immediately">立即开通</button>
+          </view>
+        </view>
+        <view class="block member member-quarter">
+          <view class="member__type">
+            <view class="text">季卡</view>
+          </view>
+          <view class="member__info">
+            <view class="price">￥45元 <text class="origin-price">原价60元</text></view>
+            <view class="tag">赠20竹币</view>
+            <view class="msg">送王者荣耀史诗级气皮肤</view>
+          </view>
+          <view class="member__open">
+            <button class="open-immediately">立即开通</button>
+          </view>
+        </view>
+        <view class="block member member-year">
+          <view class="member__type">
+            <view class="text">年卡</view>
+          </view>
+          <view class="member__info">
+            <view class="price">￥98元 <text class="origin-price">原价240元</text></view>
+            <view class="tag">赠20竹币</view>
+            <view class="msg">送王者荣耀传说级皮肤</view>
+          </view>
+          <view class="member__open">
+            <button class="open-immediately">立即开通</button>
+          </view>
+        </view>
+      </view>
+    </view>
 </template>
 <script>
 import wepy from 'wepy'
 export default class card extends wepy.page {
-    config = {
-      navigationBarTitleText: '购买借阅卡'
-    }
+  config = {
+    navigationBarTitleText: '购买会员卡',
+    navigationBarBackgroundColor: '#000000',
+    navigationBarTextStyle: 'white'
+  }
+
+  data = {
+    nickName: '',
+    avatarUrl: '',
+    msg: '您还不是VIP，购买VIP享受超值权益'
+  }
+
+  onShow() {
+    this.nickName = this.$parent.globalData.userInfo.nickName
+    this.avatarUrl = this.$parent.globalData.userInfo.avatarUrl
+  }
 }
 </script>
+<style lang="less">
+.wrapper{
+  position: relative;
+  .bottom-img{
+    width: 100vw;
+    height: 230rpx;
+    z-index: -1;
+  }
+  .container{
+    padding: 20rpx;
+    z-index: 1;
+    transform: translateY(-180rpx);
+    .user-info{
+      margin-top: 60rpx;
+      position: relative;
+      box-shadow: 0 0 10rpx #ccc inset;
+      background: #fff;
+      .avatar{
+        position: absolute;
+        height: 100rpx;
+        width: 100rpx;
+        border-radius: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -60rpx;
+      }
+      .name{
+        width: 100%;
+        height: 70rpx;
+        line-height: 70rpx;
+        text-align: center;
+        margin-top: 50rpx;
+        font-size: 28rpx;
+      }
+      .msg{
+        font-size: 28rpx;
+        color: #aaa;
+        text-align: center;
+      }
+    }
+    .member{
+      display: flex;
+      &.member-month{
+        background: linear-gradient(to right, rgb(239, 149, 63), rgb(243, 202, 79));
+        .member__open{
+          .open-immediately{
+            background: rgb(252, 239, 161);
+            color: rgb(233, 149, 64);
+          }
+        }
+      }
+      &.member-quarter{
+        background: linear-gradient(to right, rgb(239, 77, 49), rgb(241, 156, 81));
+        .member__open{
+          .open-immediately{
+            background: rgb(248, 214, 174);
+            color: rgb(223, 108, 70);
+          }
+        }
+      }
+      &.member-year{
+        background: linear-gradient(to right, rgb(65, 109, 246), rgb(86, 190, 249));
+        .member__open{
+          .open-immediately{
+            background: rgb(167, 208, 250);
+            color: rgb(68, 132, 247);
+          }
+        }
+      }
+      &__type{
+        width: 150rpx;
+        position: relative;
+        .text{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 32rpx;
+          color: #17b393;
+          width: 90rpx;
+          height: 90rpx;
+          line-height: 90rpx;
+          border-radius: 50%;
+          text-align: center;
+          background: white;
+        }
+      }
+      &__info{
+        padding: 20rpx 0;
+        flex: 1;
+        color: #fff;
+        .price{
+          font-size: 38rpx;
+          .origin-price{
+            font-size: 26rpx;
+            text-decoration: line-through;
+            margin-left: 30rpx;
+          }
+        }
+        .tag{
+          font-size: 26rpx;
+        }
+        .msg{
+          font-size: 26rpx;
+        }
+      }
+      &__open{
+        width: 170rpx;
+        .open-immediately{
+          margin-top: 45%;
+          height: 52rpx;
+          width: 80%;
+          margin: 40% 10%;
+          line-height: 52rpx;
+
+          font-size: 26rpx;
+          padding: 0;
+        }
+      }
+    }
+  }
+  .block{
+    height: 200rpx;
+    width: 640rpx;
+    border-radius: 8rpx;
+    margin-bottom: 32rpx;
+  }
+}
+</style>
