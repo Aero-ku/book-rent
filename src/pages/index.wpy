@@ -19,7 +19,7 @@
       <PandaRecommend :list.sync="bookList" ></PandaRecommend>
     </view>
   </view>
-  
+
 </template>
 <script>
 import wepy from 'wepy'
@@ -90,6 +90,9 @@ export default class firstPage extends wepy.page {
   onLoad () {
     console.log('globalData', this.$parent.globalData)
     this.initPageData()
+  }
+  onShow () {
+    this.onLoad()
   }
   initPageData() {
     let self = this

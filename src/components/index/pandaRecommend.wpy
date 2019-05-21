@@ -43,9 +43,9 @@
     methods = {
       addToShelf(book, index) {
         if (this.$parent.$parent.globalData.authorize) {
-          console.log(book, index)
+          console.log('哈哈哈哈', book, index)
           this.list[index].hasExist = true
-          this._setCartBadge()
+          this._setCartBadge(book)
         } else {
           wx.showToast({
             title: '请先登录',
@@ -63,18 +63,19 @@
       }
     }
     // 设置底部菜单中书架商品数量标志
-    _setCartBadge() {
+    _setCartBadge(book) {
       // 更新globalData书架总量数据
-      this.$parent.$parent.globalData.bookShelfTotalNum += 1
-      let len = this.$parent.$parent.globalData.bookShelfTotalNum
+      this.$parent.$parent.globalData.bookShelfTotal.push(book)
+      let len = this.$parent.$parent.globalData.bookShelfTotal.length
+      console.log('card', this.$parent.$parent.globalData.bookShelfTotal)
       if (len > 0) {
         wx.setTabBarBadge({
-          index: 1,
+          index: 2,
           text: `${len}`
         })
       } else {
         wx.removeTabBarBadge({
-          index: 1
+          index: 2
         })
       }
     }

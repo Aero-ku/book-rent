@@ -27,10 +27,10 @@
     <view class="cart-item">
       <view class="weui-cell">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label h4 reset-label-left">借阅卡:</view>
+          <view class="weui-label h4 reset-label-left">会员卡:</view>
         </view>
         <view class="weui-cell__bd weui-cell__ft_in-access h4 deliver-info">
-          暂无可用借阅卡
+          月度会员
         </view>
       </view>
     </view>
@@ -52,7 +52,7 @@
                 <icon wx:else class="weui-icon-checkbox_circle" type="circle" size="18"></icon>
               </label>
             </block>
-            <navigator url="/pages/main/detail?id={{item.book_id}}" class="cart-book-navigator">
+            <navigator url="/pages/main/detail?book_id={{item.book_id}}" class="cart-book-navigator">
               <view class="cart-book">
                 <view class="book-img-wrap">
                   <view wx:if="{{item.hasBorrow}}" class="coupon-expired">已借阅</view>
@@ -104,6 +104,12 @@ export default class borrow extends wepy.page {
   }
   onShow () {
     console.log('parent', this.$parent.globalData.authorize)
+    // this.borrowList = Object.assign({stock: 100}, this.$parent.globalData.bookShelfTotal)
+    this.borrowList = this.$parent.globalData.bookShelfTotal
+    this.borrowList.map((item, index) => {
+      item = Object.assign(item, {stock: 100, checked: false})
+    })
+    console.log('borrowList', this.borrowList)
     this.logined = this.$parent.globalData.authorize
   }
   computed = {
@@ -120,8 +126,12 @@ export default class borrow extends wepy.page {
     let borrowList = this.borrowList
     this.selectCount = bookIdArr.length
     for (let i = borrowList.length - 1; i >= 0; i--) {
-      if (selectBooks.indexOf(borrowList[i].book_id) >= 0) {
+      console.log('borrowList',borrowList[i].book_id)
+      console.log('selectBooks', selectBooks)
+      console.log('indexof', selectBooks.indexOf(borrowList[i].book_id))
+      if (selectBooks.indexOf(borrowList[i].book_id + '') >= 0) {
         borrowList[i].checked = true
+        console.log('=========')
       } else {
         borrowList[i].checked = false
       }
@@ -135,7 +145,6 @@ export default class borrow extends wepy.page {
   }
   methods = {
     checkboxChange(e) {
-      console.log(e.detail)
       console.log('checkbox发生change事件，携带value值为：', e.detail.value, this.borrowList.length)
       this.selectBookCartItem(e.detail.value)
       if (e.detail.value.length < this.borrowList.length) {
@@ -268,13 +277,13 @@ page{
     font-size: 32rpx;
     .receiver-name, .receiver-phone{
       font-weight: 400;
-      
+
     }
   }
   .address{
     padding: 0 16rpx;
     color: #4a4a4a;
-    text{ 
+    text{
       font-size: 24rpx;
     }
   }

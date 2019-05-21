@@ -26,7 +26,7 @@
           </view>
           <view class="member__info">
             <view class="price">￥45元 <text class="origin-price">原价60元</text></view>
-            <view class="tag">赠20竹币</view>
+            <view class="tag">赠60竹币</view>
             <view class="msg">送王者荣耀史诗级气皮肤</view>
           </view>
           <view class="member__open">
@@ -39,7 +39,7 @@
           </view>
           <view class="member__info">
             <view class="price">￥98元 <text class="origin-price">原价240元</text></view>
-            <view class="tag">赠20竹币</view>
+            <view class="tag">赠240竹币</view>
             <view class="msg">送王者荣耀传说级皮肤</view>
           </view>
           <view class="member__open">

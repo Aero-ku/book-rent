@@ -99,6 +99,7 @@
     }
 
     onShow () {
+      this.onLoad()
       const self = this
       // self.userInfo = self.$parent.globalData.userInfo
       self.isLogined = self.$parent.globalData.authorize

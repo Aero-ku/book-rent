@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view class="img-wrap">
-      <image class="img" src="{{book.book_image}}" /> 
+      <image class="img" src="{{book.book_image}}" />
     </view>
     <view class="book-msg">
       <view class="book-msg__name">{{book.book_name}}</view>
@@ -22,11 +22,11 @@
         <image src="../../images/new/icon_cang@2x.png" class="img" @tap="storeBook" wx:if="{{!stored}}"/>
         <image src="../../images/new/icon_cangu@2x.png" class="img" @tap="storeBook" wx:else/>
       </view>
-      <view class="go-shelf">
+      <view class="go-shelf" @tap="goShelf">
         <image src="../../images/new/icon_3u@2x.png" class="img"/>
       </view>
       <view class="add-shelf">
-        <button>加入借书架</button>
+        <button @tap="addToShelf">{{btnText}}</button>
       </view>
     </view>
   </view>
@@ -39,22 +39,32 @@ export default class details extends wepy.page {
   }
   data = {
     bookId: '',
-    userInfo: {},
     book: {},
-    stored: false
+    userInfo: {},
+    stored: false,
+    btnText: '加入借书架',
+    bookShelfExist: false
   }
   onLoad (query) {
     console.log('query', query)
     const bookId = query && +query.book_id
     this.bookId = bookId || this.book_id || 0
-    this.userInfo = this.$parent.globalData.userInfo
     this.userId = this.$parent.globalData.open_id
+  }
+  onShow() {
+    // 更新用户信息
+    this.userInfo = this.$parent.globalData.userInfo
+    this.$parent.globalData.bookShelfTotal.forEach((item, index) => {
+      if (item.book_id === this.bookId) {
+        this.bookShelfExist = true
+        this.btnText = '已加入'
+      }
+    })
     this.initPageData()
   }
   methods = {
     storeBook() {
       const self = this
-      console.log(self.stored)
       if (this.$parent.globalData.authorize) {
         self.stored = !self.stored
         const { nickName } = this.userInfo
@@ -68,7 +78,6 @@ export default class details extends wepy.page {
           success(res) {
             console.log('收藏请求响应内容：', res)
             if (res.statusCode === 200) {
-              console.log(self.$parent.globalData)
               wx.showToast({
                 title: self.stored ? '添加收藏！' : '取消收藏',
                 icon: self.stored ? 'success' : 'none',
@@ -91,6 +100,37 @@ export default class details extends wepy.page {
           }
         })
       }
+    },
+    addToShelf() {
+      if (this.$parent.globalData.authorize) {
+        if (!this.bookShelfExist) {
+          this.$parent.globalData.bookShelfTotal.push(this.book)
+          this.btnText = '已加入'
+          this.bookShelfExist = true
+          wx.showToast({
+            icon: 'success',
+            title: '加入借书架成功',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            icon: 'success',
+            title: '已在借书架中',
+            duration: 1000
+          })
+          console.log('haha', this.$parent.globalData.bookShelfTotal)
+        }
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录'
+        })
+      }
+    },
+    goShelf() {
+      wx.switchTab({
+        url: '/pages/borrow'
+      })
     }
   }
   initPageData() {
@@ -104,6 +144,7 @@ export default class details extends wepy.page {
       method: 'get',
       success(res) {
         self.book = res.data[0]
+        self.$apply()
       }
     })
     // 获取用户收藏信息
@@ -115,13 +156,14 @@ export default class details extends wepy.page {
         },
         method: 'get',
         success(res) {
+          console.log('用户收藏信息', res.data[0].user_store, self.stored)
           const { user_store } = res.data[0]
-          console.log('res.data', res.data, 'user_store', user_store)
           user_store.forEach(function (item, index, arr) {
             if (item === self.book.book_id) {
               self.stored = true
             }
           })
+          self.$apply()
         }
       })
     }
