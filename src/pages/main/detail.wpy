@@ -54,12 +54,12 @@ export default class details extends wepy.page {
   onShow() {
     // 更新用户信息
     this.userInfo = this.$parent.globalData.userInfo
-    this.$parent.globalData.bookShelfTotal.forEach((item, index) => {
-      if (item.book_id === this.bookId) {
-        this.bookShelfExist = true
-        this.btnText = '已加入'
-      }
-    })
+    // this.$parent.globalData.bookShelfTotal.forEach((item, index) => {
+    //   if (item.book_id === this.bookId) {
+    //     this.bookShelfExist = true
+    //     this.btnText = '已加入'
+    //   }
+    // })
     this.initPageData()
   }
   methods = {
@@ -102,15 +102,30 @@ export default class details extends wepy.page {
       }
     },
     addToShelf() {
+      let self = this
       if (this.$parent.globalData.authorize) {
         if (!this.bookShelfExist) {
-          this.$parent.globalData.bookShelfTotal.push(this.book)
-          this.btnText = '已加入'
-          this.bookShelfExist = true
-          wx.showToast({
-            icon: 'success',
-            title: '加入借书架成功',
-            duration: 1000
+          // this.$parent.globalData.bookShelfTotal.push(this.book)
+          const { nickName } = self.userInfo
+          wx.request({
+            url: 'http://localhost:12306/addToShelf',
+            method: 'post',
+            data: {
+              book: self.book,
+              user_name: nickName
+            },
+            success(res) {
+              if (res.statusCode === 200) {
+                console.log('加入借书架返回信息', res)
+                self.btnText = '已加入'
+                self.bookShelfExist = true
+                wx.showToast({
+                  icon: 'success',
+                  title: '加入借书架成功',
+                  duration: 1000
+                })
+              }
+            }
           })
         } else {
           wx.showToast({
@@ -118,7 +133,7 @@ export default class details extends wepy.page {
             title: '已在借书架中',
             duration: 1000
           })
-          console.log('haha', this.$parent.globalData.bookShelfTotal)
+          // console.log('haha', this.$parent.globalData.bookShelfTotal)
         }
       } else {
         wx.showToast({
@@ -136,6 +151,7 @@ export default class details extends wepy.page {
   initPageData() {
     // 获取图书详情
     const self = this
+    const { nickName } = this.userInfo
     wx.request({
       url: 'http://localhost:12306/getBookDetail',
       data: {
@@ -152,7 +168,7 @@ export default class details extends wepy.page {
       wx.request({
         url: 'http://localhost:12306/getStoreInfo',
         data: {
-          user_name: self.userInfo.nickName
+          user_name: nickName
         },
         method: 'get',
         success(res) {
@@ -167,6 +183,19 @@ export default class details extends wepy.page {
         }
       })
     }
+    // 查看用户借书架中是否已有该图书
+    wx.request({
+      url: "http://localhost:12306/shelfInfo",
+      data: {
+        user_name: nickName
+      },
+      method: 'get',
+      success(res) {
+        if (res.statusCode === 200) {
+          console.log('用户的借书架信息', res)
+        }
+      }
+    })
   }
 }
 </script>

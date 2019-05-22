@@ -46,6 +46,9 @@
           console.log('哈哈哈哈', book, index)
           this.list[index].hasExist = true
           this._setCartBadge(book)
+          wx.request({
+
+          })
         } else {
           wx.showToast({
             title: '请先登录',

@@ -123,17 +123,13 @@ export default class borrow extends wepy.page {
   // 修改选中图书项目
   selectBookCartItem(bookIdArr) {
     let selectBooks = this.getArray(bookIdArr, [])
-    let borrowList = this.borrowList
+    console.log(bookIdArr, 'bookIdArr')
     this.selectCount = bookIdArr.length
-    for (let i = borrowList.length - 1; i >= 0; i--) {
-      console.log('borrowList',borrowList[i].book_id)
-      console.log('selectBooks', selectBooks)
-      console.log('indexof', selectBooks.indexOf(borrowList[i].book_id))
-      if (selectBooks.indexOf(borrowList[i].book_id + '') >= 0) {
-        borrowList[i].checked = true
-        console.log('=========')
+    for (let i = this.borrowList.length - 1; i >= 0; i--) {
+      if (selectBooks.indexOf(this.borrowList[i].book_id) > -1) {
+        this.borrowList[i].checked = true
       } else {
-        borrowList[i].checked = false
+        this.borrowList[i].checked = false
       }
     }
   }
@@ -146,9 +142,14 @@ export default class borrow extends wepy.page {
   methods = {
     checkboxChange(e) {
       console.log('checkbox发生change事件，携带value值为：', e.detail.value, this.borrowList.length)
-      this.selectBookCartItem(e.detail.value)
+      let idsArr = e.detail.value.map((item, index) => {
+        return parseInt(item)
+      })
+      this.selectBookCartItem(idsArr)
       if (e.detail.value.length < this.borrowList.length) {
         this.selectAllState = false
+      } else {
+        this.selectAllState = true
       }
     },
     chooseAddress() {
@@ -232,6 +233,7 @@ export default class borrow extends wepy.page {
           idsArr.push(this.borrowList[i].book_id)
         }
       }
+      console.log(idsArr)
       this.selectBookCartItem(idsArr)
     }
   }

@@ -73,6 +73,15 @@ export default class listGroup extends wepy.component {
             //   avatarUrl: 'http://mxhb.sztd123.com/images/user/avatar_default.png',
             //   msg: '未登录'
             // }
+            self.$parent.$parent.globalData.bookShelfTotal = []
+            wx.removeTabBarBadge({
+              index: 2,
+              success: (result)=>{
+
+              },
+              fail: ()=>{},
+              complete: ()=>{}
+            })
             self.$emit('update', false) // false: 退出登录||未登录 true：已登录
           }
         }
