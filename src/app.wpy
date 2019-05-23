@@ -24,7 +24,8 @@ export default class app extends wepy.app {
       'pages/login/index',
       'pages/main/detail', // 图书详情
       'pages/main/myOrder', // 我的订单
-      'pages/main/bookClassify'// 图书分类
+      'pages/main/bookClassify', // 图书分类
+      'pages/main/sortPage' // 分类结果页
     ],
     window: {
       navigationBarTitleText: '满熊阅读',
@@ -86,7 +87,11 @@ export default class app extends wepy.app {
   }
 
   onLaunch() {
-    this.testAsync()
+    console.log('onLaunch监听小程序初始化')
+  }
+
+  onShow() {
+    console.log('onShow监听小程序显示')
   }
 
   sleep (s) {

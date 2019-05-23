@@ -71,27 +71,70 @@ export default class firstPage extends wepy.page {
       {id: '232', image: 'https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png', name: '《心灵养育绘本Ⅱ送玩具回家》', hasExist: false}
     ],
     recommendSortData: [
-      '获奖名著',
-      '名家大师',
-      '豆瓣8.5',
-      '热门图书',
-      '品格塑造',
-      '自我保护',
-      '热门动画',
-      '科普百科'
+      {
+        name: '情感认知',
+        value: 1
+      },
+      {
+        name: '习惯养成',
+        value: 2
+      },
+      {
+        name: '自我保护',
+        value: 3
+      },
+      {
+        name: '品格塑造',
+        value: 4
+      },
+      {
+        name: '幽默趣味',
+        value: 5
+      },
+      {
+        name: '情绪管理',
+        value: 6
+      },
+      {
+        name: '科普百科',
+        value: 7
+      },
+      {
+        name: '双语绘本',
+        value: 8
+      }
     ],
     categorys: [
       { title: '借书', image: '../images/new/icon_5@2x.png' },
       { title: '绘本回收', image: '../images/new/icon_6@2x.png' },
       { title: '新书上架', image: '../images/new/icon_8@2x.png' },
       { title: '竹币商城', image: '../images/new/icon_7@2x.png' }
-    ]
+    ],
+    borrowList: []
   }
   onLoad () {
     console.log('globalData', this.$parent.globalData)
     this.initPageData()
   }
-  onShow () {
+  onShow() {
+    if (this.$parent.globalData.authorize) {
+      let self = this
+      const { nickName } = this.$parent.globalData.userInfo
+      wx.request({
+        url: 'http://localhost:12306/shelfInfo',
+        data: {
+          user_name: nickName
+        },
+        method: 'get',
+        success(res) {
+          if (res.statusCode === 200) {
+            self.borrowList = res.data
+            self.$parent.globalData.bookShelfTotal = res.data[0].user_borrow
+            console.log('borrowList', self.borrowList)
+          }
+        }
+      })
+    }
   }
   initPageData() {
     let self = this

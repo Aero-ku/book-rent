@@ -32,7 +32,8 @@
   export default class bookRecommend extends wepy.component {
     data = {
       imgUrl: '../images/tabbars/icon-shelf@2x.png',
-      selected: false
+      selected: false,
+      borrowList: []
     }
     props = {
       list: {
@@ -40,20 +41,41 @@
         default: []
       }
     }
+
     methods = {
       addToShelf(book, index) {
         if (this.$parent.$parent.globalData.authorize) {
+          const { nickName } = this.$parent.$parent.globalData.userInfo
           console.log('哈哈哈哈', book, index)
           this.list[index].hasExist = true
           this._setCartBadge(book)
           wx.request({
-
+            url: 'http://localhost:12306/shelfInfo',
+            data: {
+              user_name: nickName
+            },
+            method: 'get',
+            success(res) {
+              if (res.statusCode === 200) {
+                self.borrowList = res.data
+                console.log('borrowList', self.borrowList)
+              }
+            }
           })
         } else {
-          wx.showToast({
+          wx.showModal({
             title: '请先登录',
-            icon: 'none',
-            duration: 1000
+            content: '是否现在就去登录？',
+            showCancel: true,
+            confirmText: '去登录',
+            confirmColor: '#17b393',
+            success: function(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/login/index'
+                })
+              }
+            }
           })
         }
       },

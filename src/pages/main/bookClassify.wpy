@@ -24,23 +24,74 @@ export default class BookClassify extends wepy.page {
   }
   data = {
     age: [
-      '0-2岁',
-      '2-4岁',
-      '4-6岁',
-      '6-10岁'
+      {
+        name: '0-2岁',
+        value: 9
+      },
+      {
+        name: '2-4岁',
+        value: 10
+      },
+      {
+        name: '4-6岁',
+        value: 11
+      },
+      {
+        name: '6-10岁',
+        value: 12
+      }
     ],
     recommend: [
-      '性教育', '二胎教育', '自我保护', '豆瓣8.5'
+      {
+        name: '性教育',
+        value: 13
+      },
+      {
+        name: '二胎教育',
+        value: 14
+      },
+      {
+        name: '自我保护',
+        value: 16
+      },
+      {
+        name: '豆瓣8.5',
+        value: 17
+      }
     ],
     classification: [
-      '获奖名著',
-      '名家大师',
-      '学习能力',
-      '入学入园',
-      '品格塑造',
-      '自我管理',
-      '热门动画',
-      '科普百科'
+      {
+        name: '情感认知',
+        value: 1
+      },
+      {
+        name: '习惯养成',
+        value: 2
+      },
+      {
+        name: '自我保护',
+        value: 3
+      },
+      {
+        name: '品格塑造',
+        value: 4
+      },
+      {
+        name: '幽默趣味',
+        value: 5
+      },
+      {
+        name: '情绪管理',
+        value: 6
+      },
+      {
+        name: '科普百科',
+        value: 7
+      },
+      {
+        name: '双语绘本',
+        value: 8
+      }
     ],
     showAll: false
   }

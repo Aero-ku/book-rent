@@ -1,0 +1,49 @@
+<template>
+  <view class="container">
+    {{typeName}}
+    <RecommendSort :list.sync="list"/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import RecommendSort from '../../components/index/pandaRecommend'
+export default class sortPage extends wepy.page {
+  config = {
+
+  }
+  components = {
+    RecommendSort
+  }
+  data = {
+    type: 0,
+    list: [],
+    typeName: ''
+  }
+  onLoad(query) {
+    console.log(query, 'query')
+    this.type = query.type
+    this.typeName = query.typeName
+    this.initPageData()
+  }
+  initPageData(type) {
+    let self = this
+    wx.request({
+      url: 'http://localhost:12306/getSortData',
+      data: {
+        type: self.type
+      },
+      method: 'get',
+      success(res) {
+        if (res.statusCode === 200) {
+          console.log(res.data)
+          self.list = res.data
+          self.$apply()
+        }
+      }
+    })
+  }
+}
+</script>
+<style lang="less">
+
+</style>

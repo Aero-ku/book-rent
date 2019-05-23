@@ -1,7 +1,7 @@
 <template>
   <view class="recommend-list">
     <view wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
-      <view class="recommend-item">{{item}}</view>
+      <navigator class="recommend-item" url="/pages/main/sortPage?type={{item.value}}&typeName={{item.name}}">{{item.name}}</navigator>
     </view>
   </view>
 </template>

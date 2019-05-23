@@ -5,7 +5,7 @@
     </view>
     <view class="book-msg">
       <view class="book-msg__name">{{book.book_name}}</view>
-      <view class="book-msg__rent">市场价：<text class="book-rent">￥{{book.book_rent}}</text></view>
+      <view class="book-msg__rent">rent：<text class="book-rent">￥{{book.book_rent}}</text></view>
       <view class="book-msg__author">作者：{{book.book_author}}</view>
       <view class="book-msg__publisher">出版：{{book.publisher}}</view>
       <view class="book-msg__score">豆瓣：{{book.score}}</view>
@@ -93,10 +93,12 @@ export default class details extends wepy.page {
           showCancel: true,
           confirmText: '去登录',
           confirmColor: '#17b393',
-          success: function() {
-            wx.navigateTo({
-              url: '/pages/login/index'
-            })
+          success: function(res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/index'
+              })
+            }
           }
         })
       }
@@ -136,16 +138,45 @@ export default class details extends wepy.page {
           // console.log('haha', this.$parent.globalData.bookShelfTotal)
         }
       } else {
-        wx.showToast({
-          icon: 'none',
-          title: '请先登录'
+        wx.showModal({
+          title: '请先登录',
+          content: '是否现在就去登录？',
+          showCancel: true,
+          confirmText: '去登录',
+          confirmColor: '#17b393',
+          success: function(res) {
+            console.log('res', res)
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/index'
+              })
+            }
+          }
         })
       }
     },
     goShelf() {
-      wx.switchTab({
-        url: '/pages/borrow'
-      })
+      if (this.$parent.globalData.authorize) {
+        wx.switchTab({
+          url: '/pages/borrow'
+        })
+      } else {
+        wx.showModal({
+          title: '请先登录',
+          content: '是否现在就去登录？',
+          showCancel: true,
+          confirmText: '去登录',
+          confirmColor: '#17b393',
+          success: function(res) {
+            console.log('res', res)
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/index'
+              })
+            }
+          }
+        })
+      }
     }
   }
   initPageData() {
@@ -184,18 +215,27 @@ export default class details extends wepy.page {
       })
     }
     // 查看用户借书架中是否已有该图书
-    wx.request({
-      url: "http://localhost:12306/shelfInfo",
-      data: {
-        user_name: nickName
-      },
-      method: 'get',
-      success(res) {
-        if (res.statusCode === 200) {
-          console.log('用户的借书架信息', res)
+    // 修改要点 当用户要将图书加入到借书架时先查询下是否有该图书，如果没有再插入
+    if (this.$parent.globalData.authorize) {
+      wx.request({
+        url: 'http://localhost:12306/shelfInfo',
+        data: {
+          user_name: nickName
+        },
+        method: 'get',
+        success(res) {
+          if (res.statusCode === 200) {
+            console.log('用户的借书架信息', res)
+            const userBorrow = res.data[0].user_borrow
+            self.bookShelfExist = userBorrow.some((item, index) => {
+              return item.book_id === self.bookId
+            })
+            self.btnText = self.bookShelfExist === true ? '已加入' : '加入借书架'
+            console.log('bookShelfExist', self.bookShelfExist === true)
+          }
         }
-      }
-    })
+      })
+    }
   }
 }
 </script>
