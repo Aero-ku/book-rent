@@ -39,7 +39,7 @@
         <checkbox-group bindchange="checkboxChange">
           <view wx:for="{{borrowList}}" wx:key="index" class="weui-cell book-item">
             <checkbox id="{{unique}}-{{index}}" hidden value="{{item.book_id}}" checked="{{item.checked}}"/>
-            <block wx:if="{{!item.stock}}">
+            <block wx:if="{{!item.book_stock}}">
               <view class="check-wrap">
                 <view class="sell-out">
                   <view class="sell-text">已借完</view>
@@ -59,9 +59,10 @@
                   <image class="book-img" src="{{item.book_image}}" mode="aspectFit" />
                 </view>
                 <view class="book-title">{{item.book_name}}</view>
+                <view class="book-rent">￥5</view>
               </view>
             </navigator>
-            <image src="../images/icon/icon-trash-64px.png" class="trash" />
+            <image src="../images/icon/icon-trash-64px.png" class="trash" @tap.stop="deleteBook({{item}}, {{index}})"/>
           </view>
         </checkbox-group>
       </view>
@@ -104,11 +105,7 @@ export default class borrow extends wepy.page {
   }
   onShow () {
     console.log('parent', this.$parent.globalData.authorize)
-    // this.borrowList = Object.assign({stock: 100}, this.$parent.globalData.bookShelfTotal)
     this.borrowList = this.$parent.globalData.bookShelfTotal
-    this.borrowList.map((item, index) => {
-      item = Object.assign(item, {stock: 100, checked: false})
-    })
     console.log('borrowList', this.borrowList)
     this.logined = this.$parent.globalData.authorize
   }
@@ -116,6 +113,8 @@ export default class borrow extends wepy.page {
     showAddressInfo() {
       return this.address && this.phone && this.receiver
     }
+  }
+  watch = {
   }
   isPhone(str) {
     return /^1\d{10}$/.test(str)
@@ -235,6 +234,32 @@ export default class borrow extends wepy.page {
       }
       console.log(idsArr)
       this.selectBookCartItem(idsArr)
+    },
+    deleteBook(item, index) {
+      console.log(item, ',', index)
+      const self = this
+      const { nickName } = self.$parent.globalData.userInfo
+      console.log(self.$parent.globalData)
+      const { book_id } = item
+      wx.request({
+        url: 'http://localhost:12306/deleteFromShelf',
+        data: {
+          user_name: nickName,
+          book_id: book_id
+        },
+        method: 'post',
+        success(res) {
+          console.log(res)
+          if (res.statusCode === 200) {
+            self.$parent.updateShelfInfo()
+            self.borrowList = self.borrowList.filter((item, index) => {
+              return item.book_id !== book_id
+            })
+            console.log(self.borrowList)
+            self.$apply()
+          }
+        }
+      })
     }
   }
 }
@@ -323,7 +348,7 @@ page{
   }
   .book-img-wrap{
     float: left;
-    margin-right: 8rpx;
+    margin-right: 20rpx;
     .book-img{
       display: block;
       width: 99rpx;
@@ -338,6 +363,13 @@ page{
     align-items: center;
     flex-grow: 1;
     overflow: hidden;
+    position: relative;
+    .book-rent{
+      position: absolute;
+      bottom: 0;
+      right: 140rpx;
+      font-size: 28rpx;
+    }
   }
   .trash{
     position: absolute;

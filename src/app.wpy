@@ -119,5 +119,29 @@ export default class app extends wepy.app {
       }
     })
   }
+  updateShelfInfo() {
+    const self = this
+    const { nickName } = this.globalData.userInfo
+    wx.request({
+      url: 'http://localhost:12306/shelfInfo',
+      data: {
+        user_name: nickName
+      },
+      method: 'get',
+      success(res) {
+        if (res.statusCode === 200) {
+          self.globalData.bookShelfTotal = res.data[0].user_borrow
+          console.log('bookShelfTotal', self.globalData.bookShelfTotal)
+          const len = res.data[0].user_borrow.length
+          if (len >= 1) {
+            wx.setTabBarBadge({
+              index: 2,
+              text: `${len}`
+            })
+          }
+        }
+      }
+    })
+  }
 }
 </script>

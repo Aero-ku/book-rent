@@ -113,27 +113,21 @@ export default class firstPage extends wepy.page {
     borrowList: []
   }
   onLoad () {
-    console.log('globalData', this.$parent.globalData)
     this.initPageData()
   }
   onShow() {
-    if (this.$parent.globalData.authorize) {
-      let self = this
-      const { nickName } = this.$parent.globalData.userInfo
-      wx.request({
-        url: 'http://localhost:12306/shelfInfo',
-        data: {
-          user_name: nickName
-        },
-        method: 'get',
-        success(res) {
-          if (res.statusCode === 200) {
-            self.borrowList = res.data
-            self.$parent.globalData.bookShelfTotal = res.data[0].user_borrow
-            console.log('borrowList', self.borrowList)
-          }
+    let self = this
+    if (self.$parent.globalData.authorize) {
+      let borrowList = this.$parent.globalData.bookShelfTotal
+      let borrowIdArr = borrowList.map((item, index) => {
+        return item.book_id
+      })
+      self.bookList.forEach((item, index) => {
+        if (borrowIdArr.indexOf(item.book_id) > -1) {
+          item.hasExist = true
         }
       })
+      console.log(self.bookList)
     }
   }
   initPageData() {
@@ -145,9 +139,7 @@ export default class firstPage extends wepy.page {
         'content-type': 'application/json'
       },
       success(res) {
-        console.log('res: ', res)
         self.bookList = res.data
-        console.log(self.bookList)
       }
     })
   }

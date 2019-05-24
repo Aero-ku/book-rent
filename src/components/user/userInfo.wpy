@@ -14,7 +14,7 @@
     </view>
     <view class="borrow-card">
       <view class="number">{{firstInfo.cardNum}}</view>
-      <view class="text">借阅卡</view>
+      <view class="text">会员卡</view>
     </view>
   </view>
 </template>
@@ -56,7 +56,7 @@ view, button, text{
     display:flex;
     padding: 0rpx 20rpx;
     box-sizing: border-box;
-    
+
     view{
       flex: 1;
     }

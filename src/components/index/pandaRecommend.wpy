@@ -44,21 +44,23 @@
 
     methods = {
       addToShelf(book, index) {
-        if (this.$parent.$parent.globalData.authorize) {
-          const { nickName } = this.$parent.$parent.globalData.userInfo
-          console.log('哈哈哈哈', book, index)
-          this.list[index].hasExist = true
-          this._setCartBadge(book)
+        const self = this
+        if (self.$parent.$parent.globalData.authorize) {
+          const { nickName } = self.$parent.$parent.globalData.userInfo
           wx.request({
-            url: 'http://localhost:12306/shelfInfo',
+            url: 'http://localhost:12306/addToShelf',
             data: {
-              user_name: nickName
+              user_name: nickName,
+              book: book
             },
-            method: 'get',
+            method: 'post',
             success(res) {
               if (res.statusCode === 200) {
-                self.borrowList = res.data
-                console.log('borrowList', self.borrowList)
+                self.$parent.$parent.updateShelfInfo()
+                wx.showToast({
+                  icon: 'success',
+                  title: '已成功加入借书架！'
+                })
               }
             }
           })
@@ -81,8 +83,7 @@
       },
       exist() {
         wx.showToast({
-          title: '已在书架中',
-          icon: 'none',
+          title: '本书已在书架中',
           duration: 1000
         })
       }

@@ -76,11 +76,11 @@ export default class listGroup extends wepy.component {
             self.$parent.$parent.globalData.bookShelfTotal = []
             wx.removeTabBarBadge({
               index: 2,
-              success: (result)=>{
+              success: (result) => {
 
               },
-              fail: ()=>{},
-              complete: ()=>{}
+              fail: () => {},
+              complete: () => {}
             })
             self.$emit('update', false) // false: 退出登录||未登录 true：已登录
           }
