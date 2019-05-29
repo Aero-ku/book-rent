@@ -4,7 +4,7 @@
     <Swiper :list.sync="banners"></Swiper>
     <Category :list.sync="categorys"></Category>
     <view class="special-topic module-item">
-      <pandaList1 name="满熊书单" url=""></pandaList1>
+      <PandaList1 name="满熊书单" url=""></PandaList1>
       <view class="special-zone">
         <SpecialTopic1 class="special-zone__item" name="0-2岁专题" url="http://mxhb.sztd123.com/images/newlist.png"></SpecialTopic1>
         <SpecialTopic2 class="special-zone__item" name="2-4岁专题" url="../images/new/newbg.png"></SpecialTopic2>
@@ -118,8 +118,9 @@ export default class firstPage extends wepy.page {
   onShow() {
     let self = this
     if (self.$parent.globalData.authorize) {
-      let borrowList = this.$parent.globalData.bookShelfTotal
-      let borrowIdArr = borrowList.map((item, index) => {
+      self.$parent.updateShelfInfo()
+      self.$apply()
+      let borrowIdArr = self.$parent.globalData.bookShelfTotal.map((item, index) => {
         return item.book_id
       })
       self.bookList.forEach((item, index) => {

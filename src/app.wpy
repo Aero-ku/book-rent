@@ -25,7 +25,8 @@ export default class app extends wepy.app {
       'pages/main/detail', // 图书详情
       'pages/main/myOrder', // 我的订单
       'pages/main/bookClassify', // 图书分类
-      'pages/main/sortPage' // 分类结果页
+      'pages/main/sortPage', // 分类结果页
+      'pages/main/myStore' // 我的收藏页
     ],
     window: {
       navigationBarTitleText: '满熊阅读',
@@ -78,7 +79,9 @@ export default class app extends wepy.app {
     authorize: false,
     open_id: '',
     // 借书架书本数量
-    bookShelfTotal: []
+    bookShelfTotal: [],
+    // 会员卡信息
+    cardInfo: {}
   }
 
   constructor () {
@@ -142,6 +145,31 @@ export default class app extends wepy.app {
         }
       }
     })
+  }
+  updateCardInfo() {
+    const self = this
+    const { nickName } = self.globalData.userInfo
+    wx.request({
+      url: 'http://localhost:12306/getCardInfo',
+      method: 'get',
+      data: {
+        userName: nickName
+      },
+      success(res) {
+        if (res.statusCode === 200) {
+          const endStamp = res.data.end_effect
+          const endTime = self.parseTime(endStamp)
+          const currentStamp = +new Date()
+          const cardStatus = endStamp >= currentStamp ? true : false
+          self.globalData.cardInfo = Object.assign({}, {endTime: endTime, cardStatus: cardStatus})
+          console.log('self.cardInfo', self.cardInfo)
+        }
+      }
+    })
+  }
+  parseTime(time) {
+    var date = new Date(time + 8 * 3600 * 1000) // 增加8小时
+    return date.toJSON().substr(0, 19).replace('T', ' ') // "2019-05-26 20:21:58"
   }
 }
 </script>

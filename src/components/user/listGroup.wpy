@@ -94,4 +94,7 @@ export default class listGroup extends wepy.component {
   .weui-cells{
     width: 100vw;
   }
+  .weui-cell__bd{
+    font-size: 28rpx;
+  }
 </style>

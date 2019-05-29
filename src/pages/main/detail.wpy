@@ -197,7 +197,7 @@ export default class details extends wepy.page {
     // 获取用户收藏信息
     if (this.$parent.globalData.authorize) {
       wx.request({
-        url: 'http://localhost:12306/getStoreInfo',
+        url: 'http://localhost:12306/getStoredInfo',
         data: {
           user_name: nickName
         },
@@ -205,6 +205,7 @@ export default class details extends wepy.page {
         success(res) {
           console.log('用户收藏信息', res.data[0].user_store, self.stored)
           const { user_store } = res.data[0]
+          console.log('user_store', user_store)
           user_store.forEach(function (item, index, arr) {
             if (item === self.book.book_id) {
               self.stored = true

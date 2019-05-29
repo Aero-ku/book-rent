@@ -59,7 +59,7 @@ page{
       line-height: 40rpx;
       width: 74rpx;
       text-align: center;
-      margin-top: 12rpx;      
+      margin-top: 12rpx;
     }
   }
 </style>

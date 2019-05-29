@@ -22,7 +22,7 @@
       </view>
       <view class="item" data-index="4" @tap="goOrder">
         <image class="item-img" src="http://mxhb.sztd123.com/images//user/icon_order_04.png"/>
-        <view class="item-text">待评价</view>
+        <view class="item-text">已完成</view>
         <view class="showCount">1</view>
       </view>
    </view>
@@ -76,7 +76,7 @@ export default class myOrder extends wepy.component {
     }
   }
   .item-group{
-    
+
     display: flex;
     .item{
       position: relative;

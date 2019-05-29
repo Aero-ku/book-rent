@@ -1,10 +1,12 @@
 <template>
   <view class="user-info">
-    <view class="store">
-      <view class="number">{{firstInfo.storeNum}}</view>
-      <view class="text">收藏</view>
+    <view class="store" >
+      <navigator url="/pages/main/myStore">
+        <view class="number">{{firstInfo.storeNum}}</view>
+        <view class="text" >收藏</view>
+      </navigator>
     </view>
-    <view class="scor">
+    <view class="score">
       <view class="number">{{firstInfo.score}}</view>
       <view class="text">积分</view>
     </view>

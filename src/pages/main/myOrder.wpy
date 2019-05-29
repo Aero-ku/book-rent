@@ -1,180 +1,132 @@
-a<template>
+<template>
   <view class="page">
     <view class="page__bd">
-        <view class="weui-tab">
-            <view class="weui-navbar">
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      <view class="weui-tab">
+        <view class="weui-navbar">
+          <block wx:for="{{tabs}}" wx:key="*this">
+            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+              <view class="weui-navbar__title">{{item}}</view>
             </view>
-            <view class="weui-tab__panel">
-              <!-- 全部 -->
-              <view hidden="{{activeIndex != 0}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-              <!-- 待付款 -->
-              <view hidden="{{activeIndex != 1}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-              <!-- 待发货 -->
-              <view class="" hidden="{{activeIndex != 2}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-              <!-- 待签收-->
-              <view hidden="{{activeIndex != 3}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-              <!-- 待归还 -->
-              <view hidden="{{activeIndex != 4}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-              <!-- 已完成 -->
-              <view hidden="{{activeIndex != 5}}">
-                <view class="order">
-                  <view class="order__time">2018-12-24 18:30</view>
-                  <view class="order__detail">
-                    <image class="order__detail--img" src="https://imagenew.qujie8.com/panda/03/22/226b03409c35ce600cfe36ac9d565403.png" />
-                    <view class="order__detail--desc">
-                      <view class="desc__name">《宝宝好习惯养成 -- 妈妈爸爸，我表现的棒么？》等8本</view>
-                      <view class="desc__other">
-                        <text class="txt">支付宝</text>
-                        <text class="txt">套餐计划：15天</text>
-                      </view>
-                      <view class="desc__money">￥76.00</view>
-                    </view>
-                  </view>
-                  <view class="order__menu">
-                    <view class="menu-item">查看物流</view>
-                    <view class="menu-item">签收</view>
-                  </view>
-                </view>
-                <view class="weui-loadmore weui-loadmore_line">
-                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
-                </view>
-              </view>
-            </view>
+          </block>
+          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
+          <view class="weui-tab__panel">
+            <!-- 全部 -->
+            <view hidden="{{activeIndex != 0}}" >
+              <view class="order" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="order__time">{{item.order_time}}</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="{{item.order_content[0].book_image}}" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">{{item.order_content[0].book_name}}等{{item.order_content.length}}本</view>
+                    <view class="desc__other">
+                      <text class="txt">借阅时间：30天</text>
+                    </view>
+                    <view class="desc__money">合计：￥{{item.order_money}}</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item" wx:if="{{item.order_status === 1}}" @tap.stop="pay({{item}})">付款</view>
+                  <view class="menu-item cancel-order" wx:if="{{item.order_status === 1}}">取消订单</view>
+                  <view class="menu-item" wx:if="{{item.order_status === 2}}" @tap.stop="deliver({{item}})">发货</view>
+                  <view class="menu-item" wx:if="{{item.order_status === 3}}" @tap.stop="confirmReceipt({{item}})">确认收货</view>
+                  <view class="menu-item" wx:if="{{item.order_status === 4}}" @tap.stop="deleteOrder({{item}})">删除订单</view>
+                </view>
+              </view>
+              <view class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
+              </view>
+            </view>
+            <!-- 待付款 -->
+            <view hidden="{{activeIndex != 1}}">
+              <view class="order" wx:for="{{orderList1}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="order__time">{{item.order_time}}</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="{{item.order_content[0].book_image}}" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">{{item.order_content[0].book_name}}等{{item.order_content.length}}本</view>
+                    <view class="desc__other">
+                      <text class="txt">借阅时间：30天</text>
+                    </view>
+                    <view class="desc__money">合计：￥{{item.order_money}}</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item" wx:if="{{item.order_status === 1}}" @tap.stop="pay({{item}})">付款</view>
+                </view>
+              </view>
+              <view class="weui-loadmore weui-loadmore_line">
+                  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
+              </view>
+            </view>
+            <!-- 待发货 -->
+            <view class="" hidden="{{activeIndex != 2}}">
+              <view class="order" wx:for="{{orderList2}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="order__time">{{item.order_time}}</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="{{item.order_content[0].book_image}}" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">{{item.order_content[0].book_name}}等{{item.order_content.length}}本</view>
+                    <view class="desc__other">
+                      <text class="txt">借阅时间：30天</text>
+                    </view>
+                    <view class="desc__money">合计：￥{{item.order_money}}</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item" wx:if="{{item.order_status === 2}}" @tap.stop="deliver({{item}})">发货</view>
+                </view>
+              </view>
+              <view class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
+              </view>
+            </view>
+            <!-- 待收货-->
+            <view hidden="{{activeIndex != 3}}">
+              <view class="order" wx:for="{{orderList3}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="order__time">{{item.order_time}}</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="{{item.order_content[0].book_image}}" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">{{item.order_content[0].book_name}}等{{item.order_content.length}}本</view>
+                    <view class="desc__other">
+                      <text class="txt">借阅时间：30天</text>
+                    </view>
+                    <view class="desc__money">合计：￥{{item.order_money}}</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item" wx:if="{{item.order_status === 3}}" @tap.stop="confirmReceipt({{item}})">确认收货</view>
+                </view>
+              </view>
+              <view class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
+              </view>
+            </view>
+            <!-- 已完成 -->
+            <view hidden="{{activeIndex != 4}}">
+              <view class="order" wx:for="{{orderList4}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="order__time">{{item.order_time}}</view>
+                <view class="order__detail">
+                  <image class="order__detail--img" src="{{item.order_content[0].book_image}}" />
+                  <view class="order__detail--desc">
+                    <view class="desc__name">{{item.order_content[0].book_name}}等{{item.order_content.length}}本</view>
+                    <view class="desc__other">
+                      <text class="txt">借阅时间：30天</text>
+                    </view>
+                    <view class="desc__money">合计：￥{{item.order_money}}</view>
+                  </view>
+                </view>
+                <view class="order__menu">
+                  <view class="menu-item" wx:if="{{item.order_status === 4}}" @tap.stop="deleteOrder({{item}})">删除订单</view>
+                </view>
+              </view>
+              <view class="weui-loadmore weui-loadmore_line">
+                <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已加载全部</view>
+              </view>
+            </view>
+          </view>
+      </view>
     </view>
 </view>
 </template>
@@ -186,11 +138,11 @@ export default class myOrder extends wepy.page {
   }
 
   data = {
-    tabs: ['全部', '待付款', '待发货', '待签收', '待归还', '已完成'],
+    tabs: ['全部', '待付款', '待发货', '待收货', '已完成'],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    sliderWidth: 62,
+    sliderWidth: 75,
     orderList: [
       {
         order_time: '2018-12-05',
@@ -200,7 +152,12 @@ export default class myOrder extends wepy.page {
         order_range: '15天',
         order_status: 1
       }
-    ]
+    ],
+    orderList1: [],
+    orderList2: [],
+    orderList3: [],
+    orderList4: [],
+    userName: ''
   }
 
   onLoad(options) {
@@ -216,27 +173,146 @@ export default class myOrder extends wepy.page {
     })
   }
 
+  onShow() {
+    const self = this
+    self.userName = this.$parent.globalData.userInfo.nickName
+    wx.request({
+      url: 'http://localhost:12306/orderInfo',
+      method: 'get',
+      data: {
+        userName: self.userName
+      },
+      success(res) {
+        if (res.statusCode === 200) {
+          console.log(res.data)
+          self.orderList = res.data
+          console.log('self.orderList', self.orderList)
+          self.orderList1 = self.orderList.filter((item) => {
+            return item.order_status === 1
+          })
+          self.orderList2 = self.orderList.filter((item) => {
+            return item.order_status === 2
+          })
+          self.orderList3 = self.orderList.filter((item) => {
+            return item.order_status === 3
+          })
+          self.orderList4 = self.orderList.filter((item) => {
+            return item.order_status === 4
+          })
+          self.$apply()
+        }
+      }
+    })
+  }
+
   methods = {
     tabClick: function (e) {
       console.log('e', e)
       this.sliderOffset = e.currentTarget.offsetLeft
       this.activeIndex = e.currentTarget.id
+    },
+    pay(item) {
+      const orderId = item.order_id
+      const self = this
+      wx.showModal({
+        title: '支付',
+        content: `￥${item.order_money}`,
+        success(res) {
+          if (res.confirm) {
+            wx.request({
+              url: 'http://localhost:12306/modifyOrderInfo',
+              data: {
+                userName: self.userName,
+                orderId: orderId,
+                status: 2
+              },
+              method: 'post',
+              success(res) {
+                if (res.statusCode === 200) {
+                  wx.showToast({
+                    title: '支付成功',
+                    icon: 'success'
+                  })
+                  wx.redirectTo({ url: '/pages/main/myOrder'})
+                }
+              }
+            })
+          }
+        }
+      })
+    },
+    deliver(item) {
+      const orderId = item.order_id
+      const self = this
+      wx.request({
+        url: 'http://localhost:12306/modifyOrderInfo',
+        method: 'post',
+        data: {
+          userName: self.userName,
+          orderId: orderId,
+          status: 3
+        },
+        success(res) {
+          if (res.statusCode === 200) {
+            wx.showToast({
+              title: '发货成功',
+              icon: 'success'
+            })
+            wx.redirectTo({url: '/pages/main/myOrder' })
+          }
+        }
+      })
+    },
+    confirmReceipt(item) {
+      console.log(item)
+      const self = this
+      const orderId = item.order_id
+      wx.showModal({
+        title: '确认收货',
+        content: `请确保收到货物后再点击确认`,
+        success(res) {
+          if (res.confirm) {
+            wx.request({
+              url: 'http://localhost:12306/modifyOrderInfo',
+              data: {
+                userName: self.userName,
+                orderId: orderId,
+                status: 4
+              },
+              method: 'post',
+              success(res) {
+                console.log(res)
+                if (res.statusCode === 200) {
+                  self.onShow()
+                  wx.showToast({
+                    title: '已确认收货',
+                    icon: 'success'
+                  })
+                  wx.redirectTo({url: '/pages/main/myOrder'})
+                }
+              }
+            })
+          }
+        }
+      })
+    },
+    deleteOrder(item) {
     }
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 button, view{
   font-weight: 400;
 }
 page,
 .page,
 .page__bd{
-
 }
 page{
   width: 100vw;
   height: 100vh;
+  background: #efefef;
 }
 .page__bd{
     padding-bottom: 0;
@@ -262,9 +338,9 @@ page{
   background: #fff;
   padding: 16rpx 30rpx;
   .order__time{
-    height: 28rpx;
-    line-height: 28rpx;
-    font-size: 20rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    font-size: 24rpx;
     font-weight: 400;
     padding-bottom: 12rpx;
   }
@@ -281,20 +357,21 @@ page{
       position: relative;
       .desc{
         &__name{
+          margin-top: 24rpx;
           line-height: 36rpx;
-          font-size: 24rpx;
+          font-size: 28rpx;
           color: #1d1d1d;
         }
         &__other{
           position: absolute;
-          
+
           display: inline-block;
-          bottom: 0;
+          bottom: 30rpx;
           .txt{
             height: 34rpx;
             line-height: 34rpx;
             font-size: 24rpx;
-            color: #9b9b9b;
+            color: #555;
             margin-right: 20rpx;
           }
         }
@@ -329,6 +406,11 @@ page{
       border-radius: 40rpx;
       padding: 0 20rpx;
       margin-left: 16rpx;
+
+      &.cancel-order{
+        border: 1px solid #999;
+        color: #666;
+      }
     }
   }
 }
@@ -336,6 +418,6 @@ page{
   border-top: 2rpx solid #ccc;
 }
 .weui-loadmore__tips_in-line {
-  background: #fff;
+  background: #efefef;
 }
 </style>

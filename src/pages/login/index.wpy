@@ -49,6 +49,7 @@ export default class loginPage extends wepy.page {
                   const data = res.data[0]
                   self.$parent.globalData.userInfo = Object.assign(self.$parent.globalData.userInfo, data)
                   self.$parent.updateShelfInfo()
+                  self.$parent.updateCardInfo()
                   wx.showToast({
                     icon: 'success',
                     title: '登录成功',

@@ -12,12 +12,12 @@
             <view class="text">月卡</view>
           </view>
           <view class="member__info">
-            <view class="price">￥18元 <text class="origin-price">原价20元</text></view>
-            <view class="tag">赠20竹币</view>
+            <view class="price">￥28元 <text class="origin-price">原价30元</text></view>
+            <view class="tag">赠28竹币</view>
             <view class="msg">送王者荣耀勇气级皮肤</view>
           </view>
           <view class="member__open">
-            <button class="open-immediately">立即开通</button>
+            <button class="open-immediately" @tap="buyCard" data-type="month">{{btnText}}</button>
           </view>
         </view>
         <view class="block member member-quarter">
@@ -25,12 +25,12 @@
             <view class="text">季卡</view>
           </view>
           <view class="member__info">
-            <view class="price">￥45元 <text class="origin-price">原价60元</text></view>
-            <view class="tag">赠60竹币</view>
-            <view class="msg">送王者荣耀史诗级气皮肤</view>
+            <view class="price">￥75元 <text class="origin-price">原价90元</text></view>
+            <view class="tag">赠75竹币</view>
+            <view class="msg">送王者荣耀史诗级皮肤</view>
           </view>
           <view class="member__open">
-            <button class="open-immediately">立即开通</button>
+            <button class="open-immediately" @tap="buyCard" data-type="quarter">{{btnText}}</button>
           </view>
         </view>
         <view class="block member member-year">
@@ -38,12 +38,12 @@
             <view class="text">年卡</view>
           </view>
           <view class="member__info">
-            <view class="price">￥98元 <text class="origin-price">原价240元</text></view>
-            <view class="tag">赠240竹币</view>
+            <view class="price">￥300元 <text class="origin-price">原价360元</text></view>
+            <view class="tag">赠300竹币</view>
             <view class="msg">送王者荣耀传说级皮肤</view>
           </view>
           <view class="member__open">
-            <button class="open-immediately">立即开通</button>
+            <button class="open-immediately" @tap="buyCard" data-type="year">{{btnText}}</button>
           </view>
         </view>
       </view>
@@ -61,12 +61,74 @@ export default class card extends wepy.page {
   data = {
     nickName: '',
     avatarUrl: '',
-    msg: '您还不是VIP，购买VIP享受超值权益'
+    msg: '您还不是VIP，购买VIP享受超值权益',
+    btnText: '立即开通'
   }
 
   onShow() {
     this.nickName = this.$parent.globalData.userInfo.nickName
     this.avatarUrl = this.$parent.globalData.userInfo.avatarUrl
+    if (this.$parent.globalData.authorize) {
+      console.log('cardInfo', this.$parent.globalData.cardInfo)
+      const cardInfo = this.$parent.globalData.cardInfo
+      if (cardInfo.cardStatus) {
+        this.msg = `满熊阅读VIP：${cardInfo.endTime}`
+        this.btnText = '立即续费'
+      }
+    }
+  }
+  parseTime(time) {
+    var date = new Date(time + 8 * 3600 * 1000) // 增加8小时
+    return date.toJSON().substr(0, 19).replace('T', ' ') // "2019-05-26 20:21:58"
+  }
+  methods = {
+    buyCard (e) {
+      console.log(e.currentTarget.dataset.type)
+      const cardType = e.currentTarget.dataset.type
+      const self = this
+      if (this.$parent.globalData.authorize) {
+        wx.showModal({
+          title: '购买会员卡',
+          content: '您确定要购买会员卡么？',
+          showCancel: true,
+          success(res) {
+            if (res.confirm) {
+              wx.request({
+                url: 'http://localhost:12306/openCard',
+                method: 'post',
+                data: {
+                  userName: self.nickName,
+                  type: cardType
+                },
+                success(res) {
+                  if (res.statusCode === 200) {
+                    wx.showToast({
+                      title: '购买成功',
+                      icon: 'success'
+                    })
+                  }
+                }
+              })
+            }
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '请先登录',
+          content: '是否现在就去登录？',
+          showCancel: true,
+          confirmText: '去登录',
+          confirmColor: '#17b393',
+          success: function(res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/index'
+              })
+            }
+          }
+        })
+      }
+    }
   }
 }
 </script>
@@ -87,6 +149,7 @@ export default class card extends wepy.page {
       position: relative;
       box-shadow: 0 0 10rpx #ccc inset;
       background: #fff;
+      // background: linear-gradient(to right, #912CEE, #BF3EFF);
       .avatar{
         position: absolute;
         height: 100rpx;
@@ -106,7 +169,7 @@ export default class card extends wepy.page {
       }
       .msg{
         font-size: 28rpx;
-        color: #aaa;
+        color: #999;
         text-align: center;
       }
     }
